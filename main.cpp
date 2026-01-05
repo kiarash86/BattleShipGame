@@ -1,16 +1,18 @@
-#include<iostream>
+#include <iostream>
 #include "graph.h"
-#include<vector>
+#include "menu.h"
+#include <vector>
 
 using namespace std;
 int main()
 {
     utfChange();
-vector<pair<int , int>> ali;
-    clsDelete();
-    tabledraw(ali );
+    showMenu();
+    switchToGo();
 
-
+    // vector<pair<int , int>> ali;
+    //   clsDelete();
+    //   tabledraw();
 
     return 0;
 }

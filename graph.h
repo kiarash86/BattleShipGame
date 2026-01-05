@@ -4,5 +4,5 @@
 #include<vector>
 using namespace std;
 void clsDelete();
-void tabledraw(vector<pair<int , int>> dots);
+void tabledraw();
 void utfChange();

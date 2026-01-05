@@ -3,6 +3,13 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+vector<pair<int , int>> dots;
+string player1;
+string player2;
+void startOfGame()
+{
+cin >> player1;
+}
 void utfChange()
 {
     system("chcp 65001");
@@ -11,8 +18,8 @@ void clsDelete()
 {
     std::system("cls");
 }
-
-void tabledraw(vector<pair<int, int>> dots)
+//vector<pair<int, int>> dots
+void tabledraw()
 {
     cout << "┏";
     cout << "━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━";
