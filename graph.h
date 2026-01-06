@@ -14,3 +14,15 @@ void randomShips();
 bool placeShips(int n, int player);
 void drawPlayerTable(int name);
 void moveShips();
+vector<int> randomNumber();
+bool matrix11(int i, int j);
+bool matrix12(int i, int j);
+bool matrix13(int i, int j);
+bool matrix14(int i, int j);
+bool matrix15(int i, int j);
+bool matrix211(int i, int j);
+bool matrix212(int i, int j);
+bool matrix213(int i, int j);
+bool matrix214(int i, int j);
+bool matrix215(int i, int j);
+

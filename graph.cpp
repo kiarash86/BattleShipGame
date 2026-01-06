@@ -282,7 +282,7 @@ void func()
         cout << endl;
     }
     cout << endl;
-     firstl = true;
+    firstl = true;
     for (auto &&i : matrix2)
     {
         bool firstcol = true;
@@ -307,7 +307,6 @@ void func()
         cout << endl;
     }
     cout << endl;
-
 }
 
 void drawPlayerTable(int name)
@@ -410,43 +409,12 @@ void moveShips()
                         }
                         else
                         {
-
-                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1)
-                            {
-                                matrix[i - 1][j] = matrix[i][j];
-                                matrix[i - 1][j + 1] = matrix[i][j + 1];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                changeposition1 = true;
-                            }
-                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1)
-                            {
-                                matrix[i + 1][j] = matrix[i][j];
-                                matrix[i + 1][j + 1] = matrix[i][j + 1];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                changeposition1 = true;
-                            }
-                            else if (j != 1 and matrix[i][j - 1] == -1)
-                            {
-                                matrix[i][j - 1] = matrix[i][j];
-                                matrix[i][j] = matrix[i][j + 1];
-                                matrix[i][j + 1] = -1;
-                                changeposition1 = true;
-                            }
-                            else if (j != 10 and matrix[i][j + 2] == -1)
-                            {
-                                matrix[i][j + 2] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j];
-                                matrix[i][j] = -1;
-                                changeposition1 = true;
-                            }
+                            changeposition1 = matrix11(i, j);
                         }
                     }
                 }
                 else if (j <= 8 and abs(matrix[i][j]) == 12 and abs(matrix[i][j + 1]) == 12 and abs(matrix[i][j + 2]) == 12)
                 {
-
                     if (!changeposition2)
                     {
 
@@ -458,43 +426,7 @@ void moveShips()
                         }
                         else
                         {
-
-                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
-                            {
-                                matrix[i - 1][j] = matrix[i][j];
-                                matrix[i - 1][j + 1] = matrix[i][j + 1];
-                                matrix[i - 1][j + 2] = matrix[i][j + 2];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                changeposition2 = true;
-                            }
-                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
-                            {
-                                matrix[i + 1][j] = matrix[i][j];
-                                matrix[i + 1][j + 1] = matrix[i][j + 1];
-                                matrix[i + 1][j + 2] = matrix[i][j + 2];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                changeposition2 = true;
-                            }
-                            else if (j != 1 and matrix[i][j - 1] == -1)
-                            {
-                                matrix[i][j - 1] = matrix[i][j];
-                                matrix[i][j] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j + 2];
-                                matrix[i][j + 2] = -1;
-                                changeposition2 = true;
-                            }
-                            else if (j != 10 and matrix[i][j + 3] == -1)
-                            {
-                                matrix[i][j + 3] = matrix[i][j + 2];
-                                matrix[i][j + 2] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j];
-                                matrix[i][j] = -1;
-                                changeposition2 = true;
-                            }
+                            changeposition2 = matrix12(i, j);
                         }
                     }
                 }
@@ -512,43 +444,7 @@ void moveShips()
                         }
                         else
                         {
-
-                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
-                            {
-                                matrix[i - 1][j] = matrix[i][j];
-                                matrix[i - 1][j + 1] = matrix[i][j + 1];
-                                matrix[i - 1][j + 2] = matrix[i][j + 2];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                changeposition3 = true;
-                            }
-                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
-                            {
-                                matrix[i + 1][j] = matrix[i][j];
-                                matrix[i + 1][j + 1] = matrix[i][j + 1];
-                                matrix[i + 1][j + 2] = matrix[i][j + 2];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                changeposition3 = true;
-                            }
-                            else if (j != 1 and matrix[i][j - 1] == -1)
-                            {
-                                matrix[i][j - 1] = matrix[i][j];
-                                matrix[i][j] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j + 2];
-                                matrix[i][j + 2] = -1;
-                                changeposition3 = true;
-                            }
-                            else if (j != 10 and matrix[i][j + 3] == -1)
-                            {
-                                matrix[i][j + 3] = matrix[i][j + 2];
-                                matrix[i][j + 2] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j];
-                                matrix[i][j] = -1;
-                                changeposition3 = true;
-                            }
+                            changeposition3 = matrix13(i, j);
                         }
                     }
                 }
@@ -567,48 +463,7 @@ void moveShips()
                         else
                         {
 
-                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1)
-                            {
-                                matrix[i - 1][j] = matrix[i][j];
-                                matrix[i - 1][j + 1] = matrix[i][j + 1];
-                                matrix[i - 1][j + 2] = matrix[i][j + 2];
-                                matrix[i - 1][j + 3] = matrix[i][j + 3];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                matrix[i][j + 3] = -1;
-                                changeposition4 = true;
-                            }
-                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1)
-                            {
-                                matrix[i + 1][j] = matrix[i][j];
-                                matrix[i + 1][j + 1] = matrix[i][j + 1];
-                                matrix[i + 1][j + 2] = matrix[i][j + 2];
-                                matrix[i + 1][j + 3] = matrix[i][j + 3];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                matrix[i][j + 3] = -1;
-                                changeposition4 = true;
-                            }
-                            else if (j != 1 and matrix[i][j - 1] == -1)
-                            {
-                                matrix[i][j - 1] = matrix[i][j];
-                                matrix[i][j] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j + 2];
-                                matrix[i][j + 2] = matrix[i][j + 3];
-                                matrix[i][j + 3] = -1;
-                                changeposition4 = true;
-                            }
-                            else if (j != 10 and matrix[i][j + 3] == -1)
-                            {
-                                matrix[i][j + 4] = matrix[i][j + 3];
-                                matrix[i][j + 3] = matrix[i][j + 2];
-                                matrix[i][j + 2] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j];
-                                matrix[i][j] = -1;
-                                changeposition4 = true;
-                            }
+                            changeposition4 = matrix14(i, j);
                         }
                     }
                 }
@@ -627,54 +482,7 @@ void moveShips()
                         else
                         {
 
-                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1 and matrix[i - 1][j + 4] == -1)
-                            {
-                                matrix[i - 1][j] = matrix[i][j];
-                                matrix[i - 1][j + 1] = matrix[i][j + 1];
-                                matrix[i - 1][j + 2] = matrix[i][j + 2];
-                                matrix[i - 1][j + 3] = matrix[i][j + 3];
-                                matrix[i - 1][j + 4] = matrix[i][j + 4];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                matrix[i][j + 3] = -1;
-                                matrix[i][j + 4] = -1;
-                                changeposition5 = true;
-                            }
-                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1 and matrix[i + 1][j + 4] == -1)
-                            {
-                                matrix[i + 1][j] = matrix[i][j];
-                                matrix[i + 1][j + 1] = matrix[i][j + 1];
-                                matrix[i + 1][j + 2] = matrix[i][j + 2];
-                                matrix[i + 1][j + 3] = matrix[i][j + 3];
-                                matrix[i + 1][j + 4] = matrix[i][j + 4];
-                                matrix[i][j] = -1;
-                                matrix[i][j + 1] = -1;
-                                matrix[i][j + 2] = -1;
-                                matrix[i][j + 3] = -1;
-                                matrix[i][j + 4] = -1;
-                                changeposition5 = true;
-                            }
-                            else if (j != 1 and matrix[i][j - 1] == -1)
-                            {
-                                matrix[i][j - 1] = matrix[i][j];
-                                matrix[i][j] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j + 2];
-                                matrix[i][j + 2] = matrix[i][j + 3];
-                                matrix[i][j + 3] = matrix[i][j + 4];
-                                matrix[i][j + 4] = -1;
-                                changeposition5 = true;
-                            }
-                            else if (j != 10 and matrix[i][j + 3] == -1)
-                            {
-                                matrix[i][j + 5] = matrix[i][j + 4];
-                                matrix[i][j + 4] = matrix[i][j + 3];
-                                matrix[i][j + 3] = matrix[i][j + 2];
-                                matrix[i][j + 2] = matrix[i][j + 1];
-                                matrix[i][j + 1] = matrix[i][j];
-                                matrix[i][j] = -1;
-                                changeposition5 = true;
-                            }
+                            changeposition5 = matrix15(i, j);
                         }
                     }
 
@@ -697,37 +505,7 @@ void moveShips()
                         }
                         else
                         {
-
-                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1)
-                            {
-                                matrix2[i - 1][j] = matrix2[i][j];
-                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                changeposition21 = true;
-                            }
-                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1)
-                            {
-                                matrix2[i + 1][j] = matrix2[i][j];
-                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                changeposition21 = true;
-                            }
-                            else if (j != 1 and matrix2[i][j - 1] == -1)
-                            {
-                                matrix2[i][j - 1] = matrix2[i][j];
-                                matrix2[i][j] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = -1;
-                                changeposition21 = true;
-                            }
-                            else if (j != 10 and matrix2[i][j + 2] == -1)
-                            {
-                                matrix2[i][j + 2] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j];
-                                matrix2[i][j] = -1;
-                                changeposition21 = true;
-                            }
+                            changeposition21 = matrix211(i, j);
                         }
                     }
                 }
@@ -746,42 +524,7 @@ void moveShips()
                         else
                         {
 
-                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
-                            {
-                                matrix2[i - 1][j] = matrix2[i][j];
-                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                changeposition22 = true;
-                            }
-                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
-                            {
-                                matrix2[i + 1][j] = matrix2[i][j];
-                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                changeposition22 = true;
-                            }
-                            else if (j != 1 and matrix2[i][j - 1] == -1)
-                            {
-                                matrix2[i][j - 1] = matrix2[i][j];
-                                matrix2[i][j] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = -1;
-                                changeposition22 = true;
-                            }
-                            else if (j != 10 and matrix2[i][j + 3] == -1)
-                            {
-                                matrix2[i][j + 3] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j];
-                                matrix2[i][j] = -1;
-                                changeposition22 = true;
-                            }
+                            changeposition22 = matrix212(i, j);
                         }
                     }
                 }
@@ -800,42 +543,7 @@ void moveShips()
                         else
                         {
 
-                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
-                            {
-                                matrix2[i - 1][j] = matrix2[i][j];
-                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                changeposition23 = true;
-                            }
-                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
-                            {
-                                matrix2[i + 1][j] = matrix2[i][j];
-                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                changeposition23 = true;
-                            }
-                            else if (j != 1 and matrix2[i][j - 1] == -1)
-                            {
-                                matrix2[i][j - 1] = matrix2[i][j];
-                                matrix2[i][j] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = -1;
-                                changeposition23 = true;
-                            }
-                            else if (j != 10 and matrix2[i][j + 3] == -1)
-                            {
-                                matrix2[i][j + 3] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j];
-                                matrix2[i][j] = -1;
-                                changeposition23 = true;
-                            }
+                            changeposition23 = matrix213(i, j);
                         }
                     }
                 }
@@ -853,49 +561,7 @@ void moveShips()
                         }
                         else
                         {
-
-                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1)
-                            {
-                                matrix2[i - 1][j] = matrix2[i][j];
-                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i - 1][j + 3] = matrix2[i][j + 3];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                matrix2[i][j + 3] = -1;
-                                changeposition24 = true;
-                            }
-                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1)
-                            {
-                                matrix2[i + 1][j] = matrix2[i][j];
-                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i + 1][j + 3] = matrix2[i][j + 3];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                matrix2[i][j + 3] = -1;
-                                changeposition24 = true;
-                            }
-                            else if (j != 1 and matrix2[i][j - 1] == -1)
-                            {
-                                matrix2[i][j - 1] = matrix2[i][j];
-                                matrix2[i][j] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = matrix2[i][j + 3];
-                                matrix2[i][j + 3] = -1;
-                                changeposition24 = true;
-                            }
-                            else if (j != 10 and matrix2[i][j + 3] == -1)
-                            {
-                                matrix2[i][j + 4] = matrix2[i][j + 3];
-                                matrix2[i][j + 3] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j];
-                                matrix2[i][j] = -1;
-                                changeposition24 = true;
-                            }
+                            changeposition24 = matrix214(i, j);
                         }
                     }
                 }
@@ -913,61 +579,693 @@ void moveShips()
                         }
                         else
                         {
-
-                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1 and matrix2[i - 1][j + 4] == -1)
-                            {
-                                matrix2[i - 1][j] = matrix2[i][j];
-                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i - 1][j + 3] = matrix2[i][j + 3];
-                                matrix2[i - 1][j + 4] = matrix2[i][j + 4];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                matrix2[i][j + 3] = -1;
-                                matrix2[i][j + 4] = -1;
-                                changeposition25 = true;
-                            }
-                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1 and matrix2[i + 1][j + 4] == -1)
-                            {
-                                matrix2[i + 1][j] = matrix2[i][j];
-                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-                                matrix2[i + 1][j + 3] = matrix2[i][j + 3];
-                                matrix2[i + 1][j + 4] = matrix2[i][j + 4];
-                                matrix2[i][j] = -1;
-                                matrix2[i][j + 1] = -1;
-                                matrix2[i][j + 2] = -1;
-                                matrix2[i][j + 3] = -1;
-                                matrix2[i][j + 4] = -1;
-                                changeposition25 = true;
-                            }
-                            else if (j != 1 and matrix2[i][j - 1] == -1)
-                            {
-                                matrix2[i][j - 1] = matrix2[i][j];
-                                matrix2[i][j] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = matrix2[i][j + 3];
-                                matrix2[i][j + 3] = matrix2[i][j + 4];
-                                matrix2[i][j + 4] = -1;
-                                changeposition25 = true;
-                            }
-                            else if (j != 10 and matrix2[i][j + 3] == -1)
-                            {
-                                matrix2[i][j + 5] = matrix2[i][j + 4];
-                                matrix2[i][j + 4] = matrix2[i][j + 3];
-                                matrix2[i][j + 3] = matrix2[i][j + 2];
-                                matrix2[i][j + 2] = matrix2[i][j + 1];
-                                matrix2[i][j + 1] = matrix2[i][j];
-                                matrix2[i][j] = -1;
-                                changeposition25 = true;
-                            }
+                            changeposition25 = matrix215(i, j);
                         }
                     }
-
-                    /* code */
                 }
             }
         }
     }
+}
+
+bool matrix11(int i, int j)
+{
+
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1)
+            {
+                matrix[i - 1][j] = matrix[i][j];
+                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                return true;
+            }
+            break;
+        case 2:
+            if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1)
+            {
+                matrix[i + 1][j] = matrix[i][j];
+                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                return true;
+            }
+            break;
+        case 3:
+            if (j != 1 and matrix[i][j - 1] == -1)
+            {
+                matrix[i][j - 1] = matrix[i][j];
+                matrix[i][j] = matrix[i][j + 1];
+                matrix[i][j + 1] = -1;
+                return true;
+            }
+            break;
+        case 4:
+            if (j != 10 and matrix[i][j + 2] == -1)
+            {
+                matrix[i][j + 2] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j];
+                matrix[i][j] = -1;
+                return true;
+            }
+            break;
+        }
+    }
+    return false;
+
+
+}
+bool matrix12(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
+            {
+                matrix[i - 1][j] = matrix[i][j];
+                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                return true;
+            }
+            break;
+        case 2:
+            if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
+            {
+                matrix[i + 1][j] = matrix[i][j];
+                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                return true;
+            }
+            break;
+        case 3:
+            if (j != 1 and matrix[i][j - 1] == -1)
+            {
+                matrix[i][j - 1] = matrix[i][j];
+                matrix[i][j] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j + 2];
+                matrix[i][j + 2] = -1;
+                return true;
+            }
+            break;
+        case 4:
+            if (j != 10 and matrix[i][j + 3] == -1)
+            {
+                matrix[i][j + 3] = matrix[i][j + 2];
+                matrix[i][j + 2] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j];
+                matrix[i][j] = -1;
+                return true;
+            }
+            break;
+        }
+    }
+    return false;
+
+
+}
+bool matrix13(int i, int j)
+{
+
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
+            {
+                matrix[i - 1][j] = matrix[i][j];
+                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
+            {
+                matrix[i + 1][j] = matrix[i][j];
+                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                return true;
+            }
+            break;
+        case 3:
+            if (j != 1 and matrix[i][j - 1] == -1)
+            {
+                matrix[i][j - 1] = matrix[i][j];
+                matrix[i][j] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j + 2];
+                matrix[i][j + 2] = -1;
+                return true;
+            }
+            break;
+        case 4:
+            if (j != 10 and matrix[i][j + 3] == -1)
+            {
+                matrix[i][j + 3] = matrix[i][j + 2];
+                matrix[i][j + 2] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j];
+                matrix[i][j] = -1;
+                return true;
+            }
+            break;
+        }
+    }
+
+    return false;
+
+
+}
+bool matrix14(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1)
+            {
+                matrix[i - 1][j] = matrix[i][j];
+                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                matrix[i - 1][j + 3] = matrix[i][j + 3];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                matrix[i][j + 3] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1)
+            {
+                matrix[i + 1][j] = matrix[i][j];
+                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                matrix[i + 1][j + 3] = matrix[i][j + 3];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                matrix[i][j + 3] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix[i][j - 1] == -1)
+            {
+                matrix[i][j - 1] = matrix[i][j];
+                matrix[i][j] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j + 2];
+                matrix[i][j + 2] = matrix[i][j + 3];
+                matrix[i][j + 3] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix[i][j + 3] == -1)
+            {
+                matrix[i][j + 4] = matrix[i][j + 3];
+                matrix[i][j + 3] = matrix[i][j + 2];
+                matrix[i][j + 2] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j];
+                matrix[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+    return false;
+
+
+}
+bool matrix15(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1 and matrix[i - 1][j + 4] == -1)
+            {
+                matrix[i - 1][j] = matrix[i][j];
+                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                matrix[i - 1][j + 3] = matrix[i][j + 3];
+                matrix[i - 1][j + 4] = matrix[i][j + 4];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                matrix[i][j + 3] = -1;
+                matrix[i][j + 4] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1 and matrix[i + 1][j + 4] == -1)
+            {
+                matrix[i + 1][j] = matrix[i][j];
+                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                matrix[i + 1][j + 3] = matrix[i][j + 3];
+                matrix[i + 1][j + 4] = matrix[i][j + 4];
+                matrix[i][j] = -1;
+                matrix[i][j + 1] = -1;
+                matrix[i][j + 2] = -1;
+                matrix[i][j + 3] = -1;
+                matrix[i][j + 4] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix[i][j - 1] == -1)
+            {
+                matrix[i][j - 1] = matrix[i][j];
+                matrix[i][j] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j + 2];
+                matrix[i][j + 2] = matrix[i][j + 3];
+                matrix[i][j + 3] = matrix[i][j + 4];
+                matrix[i][j + 4] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix[i][j + 3] == -1)
+            {
+                matrix[i][j + 5] = matrix[i][j + 4];
+                matrix[i][j + 4] = matrix[i][j + 3];
+                matrix[i][j + 3] = matrix[i][j + 2];
+                matrix[i][j + 2] = matrix[i][j + 1];
+                matrix[i][j + 1] = matrix[i][j];
+                matrix[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+    return false;
+
+}
+
+bool matrix211(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1)
+            {
+                matrix2[i - 1][j] = matrix2[i][j];
+                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1)
+            {
+                matrix2[i + 1][j] = matrix2[i][j];
+                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix2[i][j - 1] == -1)
+            {
+                matrix2[i][j - 1] = matrix2[i][j];
+                matrix2[i][j] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix2[i][j + 2] == -1)
+            {
+                matrix2[i][j + 2] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j];
+                matrix2[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+    return false;
+
+}
+bool matrix212(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
+            {
+                matrix2[i - 1][j] = matrix2[i][j];
+                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
+            {
+                matrix2[i + 1][j] = matrix2[i][j];
+                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix2[i][j - 1] == -1)
+            {
+                matrix2[i][j - 1] = matrix2[i][j];
+                matrix2[i][j] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix2[i][j + 3] == -1)
+            {
+                matrix2[i][j + 3] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j];
+                matrix2[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+    return false;
+
+}
+bool matrix213(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
+            {
+                matrix2[i - 1][j] = matrix2[i][j];
+                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
+            {
+                matrix2[i + 1][j] = matrix2[i][j];
+                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix2[i][j - 1] == -1)
+            {
+                matrix2[i][j - 1] = matrix2[i][j];
+                matrix2[i][j] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix2[i][j + 3] == -1)
+            {
+                matrix2[i][j + 3] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j];
+                matrix2[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+    return false;
+}
+bool matrix214(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1)
+            {
+                matrix2[i - 1][j] = matrix2[i][j];
+                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i - 1][j + 3] = matrix2[i][j + 3];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                matrix2[i][j + 3] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1)
+            {
+                matrix2[i + 1][j] = matrix2[i][j];
+                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i + 1][j + 3] = matrix2[i][j + 3];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                matrix2[i][j + 3] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix2[i][j - 1] == -1)
+            {
+                matrix2[i][j - 1] = matrix2[i][j];
+                matrix2[i][j] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = matrix2[i][j + 3];
+                matrix2[i][j + 3] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix2[i][j + 3] == -1)
+            {
+                matrix2[i][j + 4] = matrix2[i][j + 3];
+                matrix2[i][j + 3] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j];
+                matrix2[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+
+
+    return false;
+
+}
+bool matrix215(int i, int j)
+{
+    vector<int> random = randomNumber();
+
+    for (auto &&ww : random)
+    {
+
+        switch (ww)
+        {
+        case 1:
+            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1 and matrix2[i - 1][j + 4] == -1)
+            {
+                matrix2[i - 1][j] = matrix2[i][j];
+                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i - 1][j + 3] = matrix2[i][j + 3];
+                matrix2[i - 1][j + 4] = matrix2[i][j + 4];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                matrix2[i][j + 3] = -1;
+                matrix2[i][j + 4] = -1;
+                return true;
+            }
+
+            break;
+        case 2:
+            if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1 and matrix2[i + 1][j + 4] == -1)
+            {
+                matrix2[i + 1][j] = matrix2[i][j];
+                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                matrix2[i + 1][j + 3] = matrix2[i][j + 3];
+                matrix2[i + 1][j + 4] = matrix2[i][j + 4];
+                matrix2[i][j] = -1;
+                matrix2[i][j + 1] = -1;
+                matrix2[i][j + 2] = -1;
+                matrix2[i][j + 3] = -1;
+                matrix2[i][j + 4] = -1;
+                return true;
+            }
+
+            break;
+        case 3:
+            if (j != 1 and matrix2[i][j - 1] == -1)
+            {
+                matrix2[i][j - 1] = matrix2[i][j];
+                matrix2[i][j] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = matrix2[i][j + 3];
+                matrix2[i][j + 3] = matrix2[i][j + 4];
+                matrix2[i][j + 4] = -1;
+                return true;
+            }
+
+            break;
+        case 4:
+            if (j != 10 and matrix2[i][j + 3] == -1)
+            {
+                matrix2[i][j + 5] = matrix2[i][j + 4];
+                matrix2[i][j + 4] = matrix2[i][j + 3];
+                matrix2[i][j + 3] = matrix2[i][j + 2];
+                matrix2[i][j + 2] = matrix2[i][j + 1];
+                matrix2[i][j + 1] = matrix2[i][j];
+                matrix2[i][j] = -1;
+                return true;
+            }
+
+            break;
+        }
+    }
+
+
+    return false;
+}
+
+vector<int> randomNumber()
+{
+    vector<int> randomnumber(4, 0);
+    randomnumber[0] = rand() % 4 + 1;
+    int x = rand() % 4 + 1;
+    while (x == randomnumber[0])
+    {
+        x = rand() % 4 + 1;
+    }
+    randomnumber[1] = x;
+    while (x == randomnumber[0] or x == randomnumber[1])
+    {
+        x = rand() % 4 + 1;
+    }
+    randomnumber[2] = x;
+    randomnumber[3] = 10 - (randomnumber[0] + randomnumber[1] + randomnumber[2]);
+
+
+    return randomnumber;
+    // switch ()
+    // {
+    // case 1:
+    //     /* code */
+    //     break;
+    // case 2:
+    //     /* code */
+    //     break;
+    // case 3:
+    //     /* code */
+    //     break;
+    // case 4:
+    //     /* code */
+    //     break;
+
+    // default:
+    //     break;
+    // }
 }
