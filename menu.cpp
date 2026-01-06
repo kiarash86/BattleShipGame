@@ -50,17 +50,17 @@ int switchToGo()
 }
 
 
-void help()
+bool help()
 {
     cout << "this is battleship game\n";
     string str;
     cin >> str;
-    if(!exit(str))
+    while(!exit(str))
     {
         cin >> str;
     }
-    else
-    {
-        showMenu();
-    }
+
+    
+     return true;
+    
 }

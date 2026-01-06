@@ -11,20 +11,40 @@ int main()
     utfChange();
     showMenu();
     int swit = switchToGo();
-    switch (swit)
+    int player = 1;
+
+    while (true)
     {
-    case 1:
-        startOfGame();
-        randomShips();
-        drawPlayerTable(1);
-        break;
 
-    case 2:
-        help();
-        break;
+        switch (swit)
+        {
+        case 1:
+            startOfGame();
+            randomShips();
+            drawPlayerTable(player);
+            hit(player);
+            player = 3 - player;
 
-    case 3:
-        exit(0);
-        break;
+            while (!isThereAWinner())
+            {
+                hit(player);
+                drawPlayerTable(player);
+                player = 3 - player;
+            }
+
+            break;
+
+        case 2:
+            if (help())
+            {
+                showMenu();
+                swit = switchToGo();
+            }
+            break;
+
+        case 3:
+            exit(0);
+            break;
+        }
     }
 }

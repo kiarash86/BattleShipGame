@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
+#include <random>
+#include <algorithm>
 
 #include <vector>
 using namespace std;
@@ -25,4 +27,5 @@ bool matrix212(int i, int j);
 bool matrix213(int i, int j);
 bool matrix214(int i, int j);
 bool matrix215(int i, int j);
-
+bool isThereAWinner();
+void hit(int player);
