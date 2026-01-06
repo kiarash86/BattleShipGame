@@ -51,7 +51,7 @@ void heal(int player)
     if (player == 1)
     {
 
-        while (matrix[x][y] != -11 or matrix[x][y] != -12 or matrix[x][y] != -13 or matrix[x][y] != -14 or matrix[x][y] != -15)
+        while (matrix[x][y] != -11 and matrix[x][y] != -12 and matrix[x][y] != -13 and matrix[x][y] != -14 and matrix[x][y] != -15)
         {
             cin >> x >> y;
         }
@@ -62,7 +62,7 @@ void heal(int player)
 
     else
     {
-        while (matrix2[x][y] != -11 or matrix2[x][y] != -12 or matrix2[x][y] != -13 or matrix2[x][y] != -14 or matrix2[x][y] != -15)
+        while (matrix2[x][y] != -21 and matrix2[x][y] != -22 and matrix2[x][y] != -23 and matrix2[x][y] != -24 and matrix2[x][y] != -25)
         {
             cin >> x >> y;
         }
