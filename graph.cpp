@@ -2,16 +2,13 @@
 #define WIN32_LEAN_AND_MEAN
 #define _HAS_STD_BYTE 0
 #include <windows.h>
-
 #include "graph.h"
 #include "menu.h"
 #include <cstdlib>
-
 #include <iostream>
 #include <vector>
 #include <ctime>
 #include <algorithm>
-
 #include <cmath>
 #include <random>
 using namespace std;
@@ -45,7 +42,56 @@ bool isThereAWinner()
 
     return false;
 }
+bool radar(int player)
+{
+    int x, y;
+    cin >> x >> y;
 
+    while (x > 10 or x < 1 or y > 10 or y < 1)
+    {
+        cin >> x >> y;
+    }
+    if (player == 1)
+    {
+
+        for (size_t i = x; i < x + 4; i++)
+        {
+            for (size_t j = y; j < y + 4; j++)
+            {
+                if (i <= 10 and j <= 10)
+                {
+                    /* code */
+
+                    if (matrix2[i][j] >= 21 and matrix2[i][j] <= 25)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    else
+    {
+
+        for (size_t i = x; i < x + 4; i++)
+        {
+            for (size_t j = y; j < y + 4; j++)
+            {
+                if (i <= 10 and j <= 10)
+                {
+                    /* code */
+
+                    if (matrix[i][j] >= 21 and matrix[i][j] <= 25)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
 void heal(int player)
 {
     int x, y;
@@ -79,8 +125,20 @@ void hit(int player)
 {
     int x, y;
     cin >> x >> y;
+
     if (x == 11 and y == 11)
     {
+        if (radar(player))
+        {
+
+            MessageBoxA(NULL, "maybe there is something!!! who knows", "radar", MB_OK);
+            return;
+        }
+        else
+        {
+            MessageBoxA(NULL, "there is nothing!!", "radar", MB_OK);
+            return;
+        }
     }
 
     if (x == 0 and y == 0)
@@ -456,7 +514,7 @@ void drawPlayerTable(int name)
                     int col = 6 + ((j - 1) * 5);
 
                     cout << "\033[" << row << ";" << col << "H";
-                    cout << "☠☠";
+                    cout << "☠ ☠";
                 }
             }
         }
