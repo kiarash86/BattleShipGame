@@ -1,15 +1,93 @@
 #include "graph.h"
+#include "menu.h"
 #include <cstdlib>
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <cmath>
 using namespace std;
 vector<pair<int, int>> dots;
 vector<vector<int>> matrix(11, vector<int>(11, -1));
 string player1;
 string player2;
+int howManyDestroyedPlayer1 = 0;
+int howManyDestroyedPlayer2 = 0;
 
+void isThereAWinner()
+{
+    if (howManyDestroyedPlayer1 == 17)
+    {
+        cout << "player 1 is the winner";
+        string str;
+        cin >> str;
 
+        if (!exit(str))
+        {
+            cin >> str;
+        }
+        else
+        {
+            showMenu();
+        }
+    }
+    else if (howManyDestroyedPlayer2 == 17)
+    {
+        cout << "player 2 is the winner";
+        string str;
+        cin >> str;
+
+        if (!exit(str))
+        {
+            cin >> str;
+        }
+        else
+        {
+            showMenu();
+        }
+    }
+}
+
+void hit(int player)
+{
+    int x, y;
+    cin >> x >> y;
+    if (player == 1)
+    {
+
+        while (abs(matrix[x][y]) <= 15 and abs(matrix[x][y]) >= 11)
+        {
+            cin >> x >> y;
+        }
+
+        if (matrix[x][y] <= 25 and matrix[x][y] >= 21)
+        {
+            matrix[x][y] = -matrix[x][y];
+            howManyDestroyedPlayer1++;
+        }
+    }
+    else
+    {
+        while (abs(matrix[x][y]) <= 25 and abs(matrix[x][y]) >= 21)
+        {
+            cin >> x >> y;
+        }
+
+        if (matrix[x][y] <= 15 and matrix[x][y] >= 11)
+        {
+            matrix[x][y] = -matrix[x][y];
+            howManyDestroyedPlayer2++;
+        }
+    }
+    if (player == 1)
+    {
+        /* code */
+        drawPlayerTable(2);
+    }
+    else
+    {
+        drawPlayerTable(1);
+    }
+}
 
 void startOfGame()
 {
@@ -19,7 +97,7 @@ void startOfGame()
     cin >> player2;
     randomShips();
     clsDelete();
-    drawPlayerTable(2);
+    drawPlayerTable(1);
 }
 void utfChange()
 {
@@ -184,7 +262,7 @@ void drawPlayerTable(int name)
         }
         cout << "\033[999;1H";
     }
-    cin >> player1;
+    hit(name);
 }
 
 void moveShips()
