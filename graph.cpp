@@ -1,6 +1,12 @@
+
+#define WIN32_LEAN_AND_MEAN
+#define _HAS_STD_BYTE 0
+#include <windows.h>
+
 #include "graph.h"
 #include "menu.h"
 #include <cstdlib>
+
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -21,17 +27,19 @@ bool isThereAWinner()
 {
     if (howManyDestroyedPlayer1 == 17)
     {
-        cout << "player 1 is the winner";
+    player1  +="is the winner";
+
+        MessageBoxA(NULL, player1.c_str(), "finish" , MB_OK);
         return true;
     }
     else if (howManyDestroyedPlayer2 == 17)
-    {
-        cout << "player 2 is the winner";
+    {    player2  +="is the winner";
+
+        MessageBoxA(NULL, player2.c_str(), "finish" , MB_OK);
         return true;
     }
 
     return false;
-    
 }
 
 void hit(int player)
@@ -49,6 +57,7 @@ void hit(int player)
         if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
         {
             matrix2[x][y] = -matrix2[x][y];
+            MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
             howManyDestroyedPlayer1++;
         }
     }
@@ -62,10 +71,11 @@ void hit(int player)
         if (matrix[x][y] <= 15 and matrix[x][y] >= 11)
         {
             matrix[x][y] = -matrix[x][y];
+            MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
+
             howManyDestroyedPlayer2++;
         }
     }
-
 }
 
 void startOfGame()
@@ -74,7 +84,6 @@ void startOfGame()
     cin >> player1;
     cout << "ENTER PLAYER 2 NAME'S: ";
     cin >> player2;
-    
 }
 void utfChange()
 {
@@ -378,7 +387,6 @@ void moveShips()
                         {
 
                             changeposition1 = true;
-                            continue;
                         }
                         else
                         {
@@ -395,7 +403,6 @@ void moveShips()
                         {
 
                             changeposition2 = true;
-                            continue;
                         }
                         else
                         {
@@ -413,7 +420,6 @@ void moveShips()
                         {
 
                             changeposition3 = true;
-                            continue;
                         }
                         else
                         {
@@ -431,7 +437,6 @@ void moveShips()
                         {
 
                             changeposition4 = true;
-                            continue;
                         }
                         else
                         {
@@ -450,7 +455,6 @@ void moveShips()
                         {
 
                             changeposition5 = true;
-                            continue;
                         }
                         else
                         {
@@ -474,7 +478,6 @@ void moveShips()
                         {
 
                             changeposition21 = true;
-                            continue;
                         }
                         else
                         {
@@ -492,7 +495,6 @@ void moveShips()
                         {
 
                             changeposition22 = true;
-                            continue;
                         }
                         else
                         {
@@ -511,7 +513,6 @@ void moveShips()
                         {
 
                             changeposition23 = true;
-                            continue;
                         }
                         else
                         {
@@ -530,7 +531,6 @@ void moveShips()
                         {
 
                             changeposition24 = true;
-                            continue;
                         }
                         else
                         {
@@ -548,7 +548,6 @@ void moveShips()
                         {
 
                             changeposition25 = true;
-                            continue;
                         }
                         else
                         {
@@ -571,7 +570,7 @@ bool matrix11(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1)
+            if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1)
             {
                 matrix[i - 1][j] = matrix[i][j];
                 matrix[i - 1][j + 1] = matrix[i][j + 1];
@@ -611,8 +610,6 @@ bool matrix11(int i, int j)
         }
     }
     return false;
-
-
 }
 bool matrix12(int i, int j)
 {
@@ -624,7 +621,7 @@ bool matrix12(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
+            if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
             {
                 matrix[i - 1][j] = matrix[i][j];
                 matrix[i - 1][j + 1] = matrix[i][j + 1];
@@ -648,7 +645,7 @@ bool matrix12(int i, int j)
             }
             break;
         case 3:
-            if (j>=2 and matrix[i][j - 1] == -1)
+            if (j >= 2 and matrix[i][j - 1] == -1)
             {
                 matrix[i][j - 1] = matrix[i][j];
                 matrix[i][j] = matrix[i][j + 1];
@@ -658,7 +655,7 @@ bool matrix12(int i, int j)
             }
             break;
         case 4:
-            if (j<=7 and matrix[i][j + 3] == -1)
+            if (j <= 7 and matrix[i][j + 3] == -1)
             {
                 matrix[i][j + 3] = matrix[i][j + 2];
                 matrix[i][j + 2] = matrix[i][j + 1];
@@ -670,8 +667,6 @@ bool matrix12(int i, int j)
         }
     }
     return false;
-
-
 }
 bool matrix13(int i, int j)
 {
@@ -684,7 +679,7 @@ bool matrix13(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2 and  matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
+            if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
             {
                 matrix[i - 1][j] = matrix[i][j];
                 matrix[i - 1][j + 1] = matrix[i][j + 1];
@@ -732,8 +727,6 @@ bool matrix13(int i, int j)
     }
 
     return false;
-
-
 }
 bool matrix14(int i, int j)
 {
@@ -745,7 +738,7 @@ bool matrix14(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1)
+            if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1)
             {
                 matrix[i - 1][j] = matrix[i][j];
                 matrix[i - 1][j + 1] = matrix[i][j + 1];
@@ -801,8 +794,6 @@ bool matrix14(int i, int j)
         }
     }
     return false;
-
-
 }
 bool matrix15(int i, int j)
 {
@@ -814,7 +805,7 @@ bool matrix15(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2 and  matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1 and matrix[i - 1][j + 4] == -1)
+            if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1 and matrix[i - 1][j + 4] == -1)
             {
                 matrix[i - 1][j] = matrix[i][j];
                 matrix[i - 1][j + 1] = matrix[i][j + 1];
@@ -876,7 +867,6 @@ bool matrix15(int i, int j)
         }
     }
     return false;
-
 }
 
 bool matrix211(int i, int j)
@@ -889,7 +879,7 @@ bool matrix211(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1)
+            if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1)
             {
                 matrix2[i - 1][j] = matrix2[i][j];
                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
@@ -933,7 +923,6 @@ bool matrix211(int i, int j)
         }
     }
     return false;
-
 }
 bool matrix212(int i, int j)
 {
@@ -945,7 +934,7 @@ bool matrix212(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
+            if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
             {
                 matrix2[i - 1][j] = matrix2[i][j];
                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
@@ -995,7 +984,6 @@ bool matrix212(int i, int j)
         }
     }
     return false;
-
 }
 bool matrix213(int i, int j)
 {
@@ -1007,7 +995,7 @@ bool matrix213(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
+            if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
             {
                 matrix2[i - 1][j] = matrix2[i][j];
                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
@@ -1068,7 +1056,7 @@ bool matrix214(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1)
+            if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1)
             {
                 matrix2[i - 1][j] = matrix2[i][j];
                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
@@ -1124,9 +1112,7 @@ bool matrix214(int i, int j)
         }
     }
 
-
     return false;
-
 }
 bool matrix215(int i, int j)
 {
@@ -1138,7 +1124,7 @@ bool matrix215(int i, int j)
         switch (ww)
         {
         case 1:
-            if (i >=2  and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1 and matrix2[i - 1][j + 4] == -1)
+            if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1 and matrix2[i - 1][j + 4] == -1)
             {
                 matrix2[i - 1][j] = matrix2[i][j];
                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
@@ -1200,7 +1186,6 @@ bool matrix215(int i, int j)
         }
     }
 
-
     return false;
 }
 
@@ -1213,4 +1198,3 @@ vector<int> randomNumber()
 
     return v;
 }
-

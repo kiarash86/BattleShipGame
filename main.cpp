@@ -9,26 +9,26 @@ int main()
     srand(time(0));
 
     utfChange();
-    showMenu();
-    int swit = switchToGo();
+    int swit;
     int player = 1;
 
     while (true)
     {
-
+ showMenu();
+                swit = switchToGo();
         switch (swit)
         {
         case 1:
             startOfGame();
             randomShips();
-            drawPlayerTable(player);
-            hit(player);
-            player = 3 - player;
+           // drawPlayerTable(player);
+          //  hit(player);
+          //  player = 3 - player;
 
             while (!isThereAWinner())
             {
-                hit(player);
                 drawPlayerTable(player);
+                hit(player);
                 player = 3 - player;
             }
 
