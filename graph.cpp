@@ -22,60 +22,118 @@ string player1;
 string player2;
 int howManyDestroyedPlayer1 = 0;
 int howManyDestroyedPlayer2 = 0;
-
+int howManyHealedPlayer1 = 0;
+int howManyHealedPlayer2 = 0;
 bool isThereAWinner()
 {
     if (howManyDestroyedPlayer1 == 17)
     {
-    player1  +="is the winner";
+        player1 += "is the winner";
 
-        MessageBoxA(NULL, player1.c_str(), "finish" , MB_OK);
+        MessageBoxA(NULL, player1.c_str(), "finish", MB_OK);
         return true;
     }
     else if (howManyDestroyedPlayer2 == 17)
-    {    player2  +="is the winner";
+    {
+        player2 += "is the winner";
 
-        MessageBoxA(NULL, player2.c_str(), "finish" , MB_OK);
+        MessageBoxA(NULL, player2.c_str(), "finish", MB_OK);
         return true;
     }
 
     return false;
 }
 
-void hit(int player)
+void heal(int player)
 {
     int x, y;
     cin >> x >> y;
     if (player == 1)
     {
 
-        while (x > 10 or x < 1 or y > 10 or y < 1)
+        while (matrix[x][y] != -11 or matrix[x][y] != -12 or matrix[x][y] != -13 or matrix[x][y] != -14 or matrix[x][y] != -15)
         {
             cin >> x >> y;
         }
-
-        if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
-        {
-            matrix2[x][y] = -matrix2[x][y];
-            MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
-            howManyDestroyedPlayer1++;
-        }
+        matrix[x][y] = -matrix[x][y];
+        MessageBoxA(NULL, "heal succesfully", "heal", MB_OK);
+        howManyDestroyedPlayer2--;
     }
+
     else
     {
-        while (x > 10 or x < 1 or y > 10 or y < 1)
+        while (matrix2[x][y] != -11 or matrix2[x][y] != -12 or matrix2[x][y] != -13 or matrix2[x][y] != -14 or matrix2[x][y] != -15)
         {
             cin >> x >> y;
         }
+        matrix2[x][y] = -matrix2[x][y];
 
-        if (matrix[x][y] <= 15 and matrix[x][y] >= 11)
+        MessageBoxA(NULL, "heal succesfully", "heal", MB_OK);
+        howManyDestroyedPlayer1--;
+    }
+
+}
+
+void hit(int player)
+{
+    int x, y;
+    cin >> x >> y;
+    if (x == 0 and y == 0)
+    {
+        if (player==1)
         {
-            matrix[x][y] = -matrix[x][y];
-            MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
+            if (howManyHealedPlayer1<3)
+            {
+                heal(player);
+                return;
+            }
+            
+            /* code */
+        }
+        else
+        { if (howManyHealedPlayer2<3)
+            {
 
-            howManyDestroyedPlayer2++;
+                heal(player);
+                return;
+            }
+
         }
     }
+    
+    
+
+        if (player == 1)
+        {
+
+            while (x > 10 or x < 1 or y > 10 or y < 1)
+            {
+                cin >> x >> y;
+            }
+
+            if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
+            {
+                matrix2[x][y] = -matrix2[x][y];
+                MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
+                howManyDestroyedPlayer1++;
+            }
+        }
+        else
+        {
+            while (x > 10 or x < 1 or y > 10 or y < 1)
+            {
+                cin >> x >> y;
+            }
+
+            if (matrix[x][y] <= 15 and matrix[x][y] >= 11)
+            {
+                matrix[x][y] = -matrix[x][y];
+                MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
+
+                howManyDestroyedPlayer2++;
+            }
+        }
+    
 }
 
 void startOfGame()
