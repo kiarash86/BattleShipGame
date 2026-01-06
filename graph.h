@@ -10,3 +10,4 @@ void startOfGame();
 void func();
 void randomShips();
 bool placeShips(int n , int player);
+void drawPlayerTable(int name);

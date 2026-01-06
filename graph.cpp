@@ -16,7 +16,7 @@ void startOfGame()
     cin >> player2;
 
     clsDelete();
-    tabledraw();
+    drawPlayerTable(1);
 }
 void utfChange()
 {
@@ -29,22 +29,25 @@ void clsDelete()
 // vector<pair<int, int>> dots
 void tabledraw()
 {
-    cout << "┏";
+
+    cout << "      1     2    3    4    5    6    7    8    9   10";
+    cout << "\n";
+    cout << "    ┏";
     cout << "━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━";
     cout << "┓\n";
     for (size_t u = 0; u < 9; u++)
     {
 
         /* code */
-        cout << "┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃   \n";
-        cout << "┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫\n";
+        cout << u + 1 << "   ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃   \n";
+        cout << "    ┣━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━╋━━━━┫\n";
     }
-    cout << "┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃   \n";
+    cout << "10  ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃    ┃   \n";
 
-    cout << "┗━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┛\n";
+    cout << "    ┗━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┻━━━━┛\n";
     ;
     randomShips();
-    //func();
+    // func();
 }
 bool placeShips(int n, int player)
 {
@@ -60,23 +63,20 @@ bool placeShips(int n, int player)
         {
             y = rand() % 10 + 1;
         }
-            for (size_t j = 0; j < n; j++)
+        for (size_t j = 0; j < n; j++)
+        {
+            if (matrix[x][y + j] != -1)
             {
-                if (matrix[x][y + j] != -1)
-                {
-                    created = false;
-                    break;
-                }
+                created = false;
+                break;
             }
-            
-        
+        }
     }
 
     for (size_t j = 0; j < n; j++)
     {
         matrix[x][y + j] = player;
     }
-
 
     //   for (auto &&i : matrix)
     // {
@@ -112,4 +112,44 @@ void func()
         }
         cout << endl;
     }
+}
+
+void drawPlayerTable(int name)
+{
+    clsDelete();
+    if (name == 1)
+    {
+
+        /* code */
+    }
+
+    if (name == 1)
+    {
+        cout << player1;
+        cout << endl;
+        tabledraw();
+
+        for (size_t i = 1; i < 11; i++)
+        {
+            for (size_t j = 1; j < 11; j++)
+            {
+                if (matrix[i][j] == 11 or matrix[i][j] == 12 or matrix[i][j] == 13 or matrix[i][j] == 14 or matrix[i][j] == 15)
+                {
+                    
+                }
+            }
+        }
+    }
+    else
+    {
+        cout << player2;
+        cout << endl;
+        tabledraw();
+    }
+    cout << endl;
+    func();
+}
+
+void moveShips()
+{
 }
