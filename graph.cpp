@@ -8,6 +8,7 @@
 using namespace std;
 vector<pair<int, int>> dots;
 vector<vector<int>> matrix(11, vector<int>(11, -1));
+vector<vector<int>> matrix2(11, vector<int>(11, -1));
 string player1;
 string player2;
 int howManyDestroyedPlayer1 = 0;
@@ -54,20 +55,20 @@ void hit(int player)
     if (player == 1)
     {
 
-        while (abs(matrix[x][y]) <= 15 and abs(matrix[x][y]) >= 11)
+        while (x >10 or x <1 or y>10 or y <1)
         {
             cin >> x >> y;
         }
 
-        if (matrix[x][y] <= 25 and matrix[x][y] >= 21)
+        if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
         {
-            matrix[x][y] = -matrix[x][y];
+            matrix2[x][y] = -matrix2[x][y];
             howManyDestroyedPlayer1++;
         }
     }
     else
     {
-        while (abs(matrix[x][y]) <= 25 and abs(matrix[x][y]) >= 21)
+        while (x >10 or x <1 or y>10 or y <1)
         {
             cin >> x >> y;
         }
@@ -78,6 +79,7 @@ void hit(int player)
             howManyDestroyedPlayer2++;
         }
     }
+    isThereAWinner();
     if (player == 1)
     {
         /* code */
@@ -128,6 +130,48 @@ void tabledraw()
     ;
     // func();
 }
+// bool placeShips(int n, int player)
+// {
+//     bool created = false;
+//     int y = rand() % 10 + 1;
+//     int x = rand() % 10 + 1;
+//     while (!created)
+//     {
+//         created = true;
+//         y = rand() % 10 + 1;
+//         x = rand() % 10 + 1;
+//         while (y + n > 11)
+//         {
+//             y = rand() % 10 + 1;
+//         }
+//         for (size_t j = 0; j < n; j++)
+//         {
+//             if (matrix[x][y + j] != -1)
+//             {
+//                 created = false;
+//                 break;
+//             }
+//         }
+//     }
+
+//     for (size_t j = 0; j < n; j++)
+//     {
+//         matrix[x][y + j] = player;
+//     }
+
+//     //   for (auto &&i : matrix)
+//     // {
+//     //     for (auto &&j : i)
+//     //     {
+//     //         cout << j << ' ';
+//     //     }
+//     //     cout << endl;
+//     // }
+//     return true;
+// }
+
+
+
 bool placeShips(int n, int player)
 {
     bool created = false;
@@ -168,6 +212,48 @@ bool placeShips(int n, int player)
     return true;
 }
 
+
+
+bool placeShips2(int n, int player)
+{
+    bool created = false;
+    int y = rand() % 10 + 1;
+    int x = rand() % 10 + 1;
+    while (!created)
+    {
+        created = true;
+        y = rand() % 10 + 1;
+        x = rand() % 10 + 1;
+        while (y + n > 11)
+        {
+            y = rand() % 10 + 1;
+        }
+        for (size_t j = 0; j < n; j++)
+        {
+            if (matrix2[x][y + j] != -1)
+            {
+                created = false;
+                break;
+            }
+        }
+    }
+
+    for (size_t j = 0; j < n; j++)
+    {
+        matrix2[x][y + j] = player;
+    }
+
+    //   for (auto &&i : matrix)
+    // {
+    //     for (auto &&j : i)
+    //     {
+    //         cout << j << ' ';
+    //     }
+    //     cout << endl;
+    // }
+    return true;
+}
+
 void randomShips()
 {
     placeShips(2, 11);
@@ -175,11 +261,11 @@ void randomShips()
     placeShips(3, 13);
     placeShips(4, 14);
     placeShips(5, 15);
-    placeShips(2, 21);
-    placeShips(3, 22);
-    placeShips(3, 23);
-    placeShips(4, 24);
-    placeShips(5, 25);
+    placeShips2(2, 21);
+    placeShips2(3, 22);
+    placeShips2(3, 23);
+    placeShips2(4, 24);
+    placeShips2(5, 25);
 }
 void func()
 {
@@ -196,12 +282,6 @@ void func()
 void drawPlayerTable(int name)
 {
     clsDelete();
-    if (name == 1)
-    {
-
-        /* code */
-    }
-
     if (name == 1)
     {
         cout << "                             " << player1 << endl;
@@ -242,7 +322,7 @@ void drawPlayerTable(int name)
         {
             for (size_t j = 1; j < 11; j++)
             {
-                if (matrix[i][j] == 21 or matrix[i][j] == 22 or matrix[i][j] == 23 or matrix[i][j] == 24 or matrix[i][j] == 25)
+                if (matrix2[i][j] == 21 or matrix2[i][j] == 22 or matrix2[i][j] == 23 or matrix2[i][j] == 24 or matrix2[i][j] == 25)
                 {
                     int row = 4 + (i - 1) * 2;
                     int col = 6 + ((j - 1) * 5);
@@ -250,7 +330,7 @@ void drawPlayerTable(int name)
                     cout << "\033[" << row << ";" << col << "H";
                     cout << "████";
                 }
-                else if (matrix[i][j] == -21 or matrix[i][j] == -22 or matrix[i][j] == -23 or matrix[i][j] == -24 or matrix[i][j] == -25)
+                else if (matrix2[i][j] == -21 or matrix2[i][j] == -22 or matrix2[i][j] == -23 or matrix2[i][j] == -24 or matrix2[i][j] == -25)
                 {
                     int row = 4 + (i - 1) * 2;
                     int col = 6 + ((j - 1) * 5);
@@ -267,4 +347,9 @@ void drawPlayerTable(int name)
 
 void moveShips()
 {
+
+
+
+
+
 }
