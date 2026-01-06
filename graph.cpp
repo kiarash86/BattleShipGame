@@ -19,17 +19,7 @@ void isThereAWinner()
     if (howManyDestroyedPlayer1 == 17)
     {
         cout << "player 1 is the winner";
-        string str;
-        cin >> str;
-
-        if (!exit(str))
-        {
-            cin >> str;
-        }
-        else
-        {
-            showMenu();
-        }
+        showMenu();
     }
     else if (howManyDestroyedPlayer2 == 17)
     {
@@ -55,7 +45,7 @@ void hit(int player)
     if (player == 1)
     {
 
-        while (x >10 or x <1 or y>10 or y <1)
+        while (x > 10 or x < 1 or y > 10 or y < 1)
         {
             cin >> x >> y;
         }
@@ -68,7 +58,7 @@ void hit(int player)
     }
     else
     {
-        while (x >10 or x <1 or y>10 or y <1)
+        while (x > 10 or x < 1 or y > 10 or y < 1)
         {
             cin >> x >> y;
         }
@@ -80,9 +70,11 @@ void hit(int player)
         }
     }
     isThereAWinner();
+    //  moveShips();
     if (player == 1)
     {
         /* code */
+
         drawPlayerTable(2);
     }
     else
@@ -170,8 +162,6 @@ void tabledraw()
 //     return true;
 // }
 
-
-
 bool placeShips(int n, int player)
 {
     bool created = false;
@@ -211,8 +201,6 @@ bool placeShips(int n, int player)
     // }
     return true;
 }
-
-
 
 bool placeShips2(int n, int player)
 {
@@ -269,19 +257,63 @@ void randomShips()
 }
 void func()
 {
+    bool firstl = true;
     for (auto &&i : matrix)
     {
+        bool firstcol = true;
+
+        if (firstl)
+        {
+            firstl = false;
+            continue;
+            /* code */
+        }
+
         for (auto &&j : i)
         {
+            if (firstcol)
+            {
+                firstcol = false;
+                continue;
+                /* code */
+            }
             cout << j << ' ';
         }
         cout << endl;
     }
+    cout << endl;
+     firstl = true;
+    for (auto &&i : matrix2)
+    {
+        bool firstcol = true;
+
+        if (firstl)
+        {
+            firstl = false;
+            continue;
+            /* code */
+        }
+
+        for (auto &&j : i)
+        {
+            if (firstcol)
+            {
+                firstcol = false;
+                continue;
+                /* code */
+            }
+            cout << j << ' ';
+        }
+        cout << endl;
+    }
+    cout << endl;
+
 }
 
 void drawPlayerTable(int name)
 {
     clsDelete();
+    moveShips();
     if (name == 1)
     {
         cout << "                             " << player1 << endl;
@@ -342,14 +374,600 @@ void drawPlayerTable(int name)
         }
         cout << "\033[999;1H";
     }
+    func();
     hit(name);
 }
 
 void moveShips()
 {
+    bool changeposition1 = false;
+    bool changeposition2 = false;
+    bool changeposition3 = false;
+    bool changeposition4 = false;
+    bool changeposition5 = false;
+    bool changeposition21 = false;
+    bool changeposition22 = false;
+    bool changeposition23 = false;
+    bool changeposition24 = false;
+    bool changeposition25 = false;
+    for (size_t i = 1; i < 11; i++)
+    {
+        for (size_t j = 1; j < 10; j++)
+        {
 
+            if (abs(matrix[i][j]) >= 11 and abs(matrix[i][j]) <= 15)
+            {
+                if (abs(matrix[i][j]) == 11 and abs(matrix[i][j + 1]) == 11)
+                {
+                    if (!changeposition1)
+                    {
 
+                        if ((matrix[i][j]) == -11 and (matrix[i][j + 1]) == -11)
+                        {
 
+                            changeposition1 = true;
+                            continue;
+                        }
+                        else
+                        {
 
+                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1)
+                            {
+                                matrix[i - 1][j] = matrix[i][j];
+                                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                changeposition1 = true;
+                            }
+                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1)
+                            {
+                                matrix[i + 1][j] = matrix[i][j];
+                                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                changeposition1 = true;
+                            }
+                            else if (j != 1 and matrix[i][j - 1] == -1)
+                            {
+                                matrix[i][j - 1] = matrix[i][j];
+                                matrix[i][j] = matrix[i][j + 1];
+                                matrix[i][j + 1] = -1;
+                                changeposition1 = true;
+                            }
+                            else if (j != 10 and matrix[i][j + 2] == -1)
+                            {
+                                matrix[i][j + 2] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j];
+                                matrix[i][j] = -1;
+                                changeposition1 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 8 and abs(matrix[i][j]) == 12 and abs(matrix[i][j + 1]) == 12 and abs(matrix[i][j + 2]) == 12)
+                {
 
+                    if (!changeposition2)
+                    {
+
+                        if ((matrix[i][j]) == -12 and (matrix[i][j + 1]) == -12 and (matrix[i][j + 2]) == -12)
+                        {
+
+                            changeposition2 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
+                            {
+                                matrix[i - 1][j] = matrix[i][j];
+                                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                changeposition2 = true;
+                            }
+                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
+                            {
+                                matrix[i + 1][j] = matrix[i][j];
+                                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                changeposition2 = true;
+                            }
+                            else if (j != 1 and matrix[i][j - 1] == -1)
+                            {
+                                matrix[i][j - 1] = matrix[i][j];
+                                matrix[i][j] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j + 2];
+                                matrix[i][j + 2] = -1;
+                                changeposition2 = true;
+                            }
+                            else if (j != 10 and matrix[i][j + 3] == -1)
+                            {
+                                matrix[i][j + 3] = matrix[i][j + 2];
+                                matrix[i][j + 2] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j];
+                                matrix[i][j] = -1;
+                                changeposition2 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 8 and abs(matrix[i][j]) == 13 and abs(matrix[i][j + 1]) == 13 and abs(matrix[i][j + 2]) == 13)
+                {
+
+                    if (!changeposition3)
+                    {
+
+                        if ((matrix[i][j]) == -13 and (matrix[i][j + 1]) == -13 and (matrix[i][j + 2]) == -13)
+                        {
+
+                            changeposition3 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
+                            {
+                                matrix[i - 1][j] = matrix[i][j];
+                                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                changeposition3 = true;
+                            }
+                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
+                            {
+                                matrix[i + 1][j] = matrix[i][j];
+                                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                changeposition3 = true;
+                            }
+                            else if (j != 1 and matrix[i][j - 1] == -1)
+                            {
+                                matrix[i][j - 1] = matrix[i][j];
+                                matrix[i][j] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j + 2];
+                                matrix[i][j + 2] = -1;
+                                changeposition3 = true;
+                            }
+                            else if (j != 10 and matrix[i][j + 3] == -1)
+                            {
+                                matrix[i][j + 3] = matrix[i][j + 2];
+                                matrix[i][j + 2] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j];
+                                matrix[i][j] = -1;
+                                changeposition3 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 7 and abs(matrix[i][j]) == 14 and abs(matrix[i][j + 1]) == 14 and abs(matrix[i][j + 2]) == 14 and abs(matrix[i][j + 3]) == 14)
+                {
+
+                    if (!changeposition4)
+                    {
+
+                        if ((matrix[i][j]) == -14 and (matrix[i][j + 1]) == -14 and (matrix[i][j + 2]) == -14 and (matrix[i][j + 3]) == -14)
+                        {
+
+                            changeposition4 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1)
+                            {
+                                matrix[i - 1][j] = matrix[i][j];
+                                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                                matrix[i - 1][j + 3] = matrix[i][j + 3];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                matrix[i][j + 3] = -1;
+                                changeposition4 = true;
+                            }
+                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1)
+                            {
+                                matrix[i + 1][j] = matrix[i][j];
+                                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                                matrix[i + 1][j + 3] = matrix[i][j + 3];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                matrix[i][j + 3] = -1;
+                                changeposition4 = true;
+                            }
+                            else if (j != 1 and matrix[i][j - 1] == -1)
+                            {
+                                matrix[i][j - 1] = matrix[i][j];
+                                matrix[i][j] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j + 2];
+                                matrix[i][j + 2] = matrix[i][j + 3];
+                                matrix[i][j + 3] = -1;
+                                changeposition4 = true;
+                            }
+                            else if (j != 10 and matrix[i][j + 3] == -1)
+                            {
+                                matrix[i][j + 4] = matrix[i][j + 3];
+                                matrix[i][j + 3] = matrix[i][j + 2];
+                                matrix[i][j + 2] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j];
+                                matrix[i][j] = -1;
+                                changeposition4 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 6 and abs(matrix[i][j]) == 15 and abs(matrix[i][j + 1]) == 15 and abs(matrix[i][j + 2]) == 15 and abs(matrix[i][j + 3]) == 15 and abs(matrix[i][j + 4]) == 15)
+                {
+
+                    if (!changeposition5)
+                    {
+
+                        if ((matrix[i][j]) == -15 and (matrix[i][j + 1]) == -15 and (matrix[i][j + 2]) == -15 and (matrix[i][j + 3]) == -15 and (matrix[i][j + 4]) == -15)
+                        {
+
+                            changeposition5 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1 and matrix[i - 1][j + 4] == -1)
+                            {
+                                matrix[i - 1][j] = matrix[i][j];
+                                matrix[i - 1][j + 1] = matrix[i][j + 1];
+                                matrix[i - 1][j + 2] = matrix[i][j + 2];
+                                matrix[i - 1][j + 3] = matrix[i][j + 3];
+                                matrix[i - 1][j + 4] = matrix[i][j + 4];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                matrix[i][j + 3] = -1;
+                                matrix[i][j + 4] = -1;
+                                changeposition5 = true;
+                            }
+                            else if (i != 10 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1 and matrix[i + 1][j + 4] == -1)
+                            {
+                                matrix[i + 1][j] = matrix[i][j];
+                                matrix[i + 1][j + 1] = matrix[i][j + 1];
+                                matrix[i + 1][j + 2] = matrix[i][j + 2];
+                                matrix[i + 1][j + 3] = matrix[i][j + 3];
+                                matrix[i + 1][j + 4] = matrix[i][j + 4];
+                                matrix[i][j] = -1;
+                                matrix[i][j + 1] = -1;
+                                matrix[i][j + 2] = -1;
+                                matrix[i][j + 3] = -1;
+                                matrix[i][j + 4] = -1;
+                                changeposition5 = true;
+                            }
+                            else if (j != 1 and matrix[i][j - 1] == -1)
+                            {
+                                matrix[i][j - 1] = matrix[i][j];
+                                matrix[i][j] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j + 2];
+                                matrix[i][j + 2] = matrix[i][j + 3];
+                                matrix[i][j + 3] = matrix[i][j + 4];
+                                matrix[i][j + 4] = -1;
+                                changeposition5 = true;
+                            }
+                            else if (j != 10 and matrix[i][j + 3] == -1)
+                            {
+                                matrix[i][j + 5] = matrix[i][j + 4];
+                                matrix[i][j + 4] = matrix[i][j + 3];
+                                matrix[i][j + 3] = matrix[i][j + 2];
+                                matrix[i][j + 2] = matrix[i][j + 1];
+                                matrix[i][j + 1] = matrix[i][j];
+                                matrix[i][j] = -1;
+                                changeposition5 = true;
+                            }
+                        }
+                    }
+
+                    /* code */
+                }
+            }
+
+            if (abs(matrix2[i][j]) >= 21 and abs(matrix2[i][j]) <= 25)
+            {
+                if (abs(matrix2[i][j]) == 21 and abs(matrix2[i][j + 1]) == 21)
+                {
+                    if (!changeposition21)
+                    {
+
+                        if ((matrix2[i][j]) == -21 and (matrix2[i][j + 1]) == -21)
+                        {
+
+                            changeposition21 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1)
+                            {
+                                matrix2[i - 1][j] = matrix2[i][j];
+                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                changeposition21 = true;
+                            }
+                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1)
+                            {
+                                matrix2[i + 1][j] = matrix2[i][j];
+                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                changeposition21 = true;
+                            }
+                            else if (j != 1 and matrix2[i][j - 1] == -1)
+                            {
+                                matrix2[i][j - 1] = matrix2[i][j];
+                                matrix2[i][j] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = -1;
+                                changeposition21 = true;
+                            }
+                            else if (j != 10 and matrix2[i][j + 2] == -1)
+                            {
+                                matrix2[i][j + 2] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j];
+                                matrix2[i][j] = -1;
+                                changeposition21 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 8 and abs(matrix2[i][j]) == 22 and abs(matrix2[i][j + 1]) == 22 and abs(matrix2[i][j + 2]) == 22)
+                {
+
+                    if (!changeposition22)
+                    {
+
+                        if ((matrix2[i][j]) == -22 and (matrix2[i][j + 1]) == -22 and (matrix2[i][j + 2]) == -22)
+                        {
+
+                            changeposition22 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
+                            {
+                                matrix2[i - 1][j] = matrix2[i][j];
+                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                changeposition22 = true;
+                            }
+                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
+                            {
+                                matrix2[i + 1][j] = matrix2[i][j];
+                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                changeposition22 = true;
+                            }
+                            else if (j != 1 and matrix2[i][j - 1] == -1)
+                            {
+                                matrix2[i][j - 1] = matrix2[i][j];
+                                matrix2[i][j] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = -1;
+                                changeposition22 = true;
+                            }
+                            else if (j != 10 and matrix2[i][j + 3] == -1)
+                            {
+                                matrix2[i][j + 3] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j];
+                                matrix2[i][j] = -1;
+                                changeposition22 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 8 and abs(matrix2[i][j]) == 23 and abs(matrix2[i][j + 1]) == 23 and abs(matrix2[i][j + 2]) == 23)
+                {
+
+                    if (!changeposition23)
+                    {
+
+                        if ((matrix2[i][j]) == -23 and (matrix2[i][j + 1]) == -23 and (matrix2[i][j + 2]) == -23)
+                        {
+
+                            changeposition23 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
+                            {
+                                matrix2[i - 1][j] = matrix2[i][j];
+                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                changeposition23 = true;
+                            }
+                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
+                            {
+                                matrix2[i + 1][j] = matrix2[i][j];
+                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                changeposition23 = true;
+                            }
+                            else if (j != 1 and matrix2[i][j - 1] == -1)
+                            {
+                                matrix2[i][j - 1] = matrix2[i][j];
+                                matrix2[i][j] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = -1;
+                                changeposition23 = true;
+                            }
+                            else if (j != 10 and matrix2[i][j + 3] == -1)
+                            {
+                                matrix2[i][j + 3] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j];
+                                matrix2[i][j] = -1;
+                                changeposition23 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 7 and abs(matrix2[i][j]) == 24 and abs(matrix2[i][j + 1]) == 24 and abs(matrix2[i][j + 2]) == 24 and abs(matrix2[i][j + 3]) == 24)
+                {
+
+                    if (!changeposition24)
+                    {
+
+                        if ((matrix2[i][j]) == -24 and (matrix2[i][j + 1]) == -24 and (matrix2[i][j + 2]) == -24 and (matrix2[i][j + 3]) == -24)
+                        {
+
+                            changeposition24 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1)
+                            {
+                                matrix2[i - 1][j] = matrix2[i][j];
+                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i - 1][j + 3] = matrix2[i][j + 3];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                matrix2[i][j + 3] = -1;
+                                changeposition24 = true;
+                            }
+                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1)
+                            {
+                                matrix2[i + 1][j] = matrix2[i][j];
+                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i + 1][j + 3] = matrix2[i][j + 3];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                matrix2[i][j + 3] = -1;
+                                changeposition24 = true;
+                            }
+                            else if (j != 1 and matrix2[i][j - 1] == -1)
+                            {
+                                matrix2[i][j - 1] = matrix2[i][j];
+                                matrix2[i][j] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = matrix2[i][j + 3];
+                                matrix2[i][j + 3] = -1;
+                                changeposition24 = true;
+                            }
+                            else if (j != 10 and matrix2[i][j + 3] == -1)
+                            {
+                                matrix2[i][j + 4] = matrix2[i][j + 3];
+                                matrix2[i][j + 3] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j];
+                                matrix2[i][j] = -1;
+                                changeposition24 = true;
+                            }
+                        }
+                    }
+                }
+                else if (j <= 6 and abs(matrix2[i][j]) == 25 and abs(matrix2[i][j + 1]) == 25 and abs(matrix2[i][j + 2]) == 25 and abs(matrix2[i][j + 3]) == 25 and abs(matrix2[i][j + 4]) == 25)
+                {
+
+                    if (!changeposition25)
+                    {
+
+                        if ((matrix2[i][j]) == -25 and (matrix2[i][j + 1]) == -25 and (matrix2[i][j + 2]) == -25 and (matrix2[i][j + 3]) == -25 and (matrix2[i][j + 4]) == -25)
+                        {
+
+                            changeposition25 = true;
+                            continue;
+                        }
+                        else
+                        {
+
+                            if (i != 1 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1 and matrix2[i - 1][j + 4] == -1)
+                            {
+                                matrix2[i - 1][j] = matrix2[i][j];
+                                matrix2[i - 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i - 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i - 1][j + 3] = matrix2[i][j + 3];
+                                matrix2[i - 1][j + 4] = matrix2[i][j + 4];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                matrix2[i][j + 3] = -1;
+                                matrix2[i][j + 4] = -1;
+                                changeposition25 = true;
+                            }
+                            else if (i != 10 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1 and matrix2[i + 1][j + 4] == -1)
+                            {
+                                matrix2[i + 1][j] = matrix2[i][j];
+                                matrix2[i + 1][j + 1] = matrix2[i][j + 1];
+                                matrix2[i + 1][j + 2] = matrix2[i][j + 2];
+                                matrix2[i + 1][j + 3] = matrix2[i][j + 3];
+                                matrix2[i + 1][j + 4] = matrix2[i][j + 4];
+                                matrix2[i][j] = -1;
+                                matrix2[i][j + 1] = -1;
+                                matrix2[i][j + 2] = -1;
+                                matrix2[i][j + 3] = -1;
+                                matrix2[i][j + 4] = -1;
+                                changeposition25 = true;
+                            }
+                            else if (j != 1 and matrix2[i][j - 1] == -1)
+                            {
+                                matrix2[i][j - 1] = matrix2[i][j];
+                                matrix2[i][j] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = matrix2[i][j + 3];
+                                matrix2[i][j + 3] = matrix2[i][j + 4];
+                                matrix2[i][j + 4] = -1;
+                                changeposition25 = true;
+                            }
+                            else if (j != 10 and matrix2[i][j + 3] == -1)
+                            {
+                                matrix2[i][j + 5] = matrix2[i][j + 4];
+                                matrix2[i][j + 4] = matrix2[i][j + 3];
+                                matrix2[i][j + 3] = matrix2[i][j + 2];
+                                matrix2[i][j + 2] = matrix2[i][j + 1];
+                                matrix2[i][j + 1] = matrix2[i][j];
+                                matrix2[i][j] = -1;
+                                changeposition25 = true;
+                            }
+                        }
+                    }
+
+                    /* code */
+                }
+            }
+        }
+    }
 }
