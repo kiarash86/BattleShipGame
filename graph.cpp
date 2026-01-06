@@ -352,8 +352,19 @@ void func()
 
 void drawPlayerTable(int name)
 {
+    static bool first = true;
+    if (first)
+    {
+        first = false;
+    }
+    else 
+    {
+            moveShips();
+
+    }
+    
     clsDelete();
-    moveShips();
+  
     if (name == 1)
     {
         cout << "                             " << player1 << endl;
