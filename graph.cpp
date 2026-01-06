@@ -17,6 +17,8 @@
 using namespace std;
 vector<pair<int, int>> dots;
 vector<vector<int>> matrix(11, vector<int>(11, -1));
+vector<vector<int>> matrixMineA(11, vector<int>(11, 0));
+vector<vector<int>> matrixMineB(11, vector<int>(11, 0));
 vector<vector<int>> matrix2(11, vector<int>(11, -1));
 string player1;
 string player2;
@@ -71,7 +73,6 @@ void heal(int player)
         MessageBoxA(NULL, "heal succesfully", "heal", MB_OK);
         howManyDestroyedPlayer1--;
     }
-
 }
 
 void hit(int player)
@@ -80,60 +81,57 @@ void hit(int player)
     cin >> x >> y;
     if (x == 0 and y == 0)
     {
-        if (player==1)
+        if (player == 1)
         {
-            if (howManyHealedPlayer1<3)
+            if (howManyHealedPlayer1 < 3)
             {
                 heal(player);
                 return;
             }
-            
+
             /* code */
         }
         else
-        { if (howManyHealedPlayer2<3)
+        {
+            if (howManyHealedPlayer2 < 3)
             {
 
                 heal(player);
                 return;
             }
-
         }
     }
-    
-    
 
-        if (player == 1)
+    if (player == 1)
+    {
+
+        while (x > 10 or x < 1 or y > 10 or y < 1)
         {
-
-            while (x > 10 or x < 1 or y > 10 or y < 1)
-            {
-                cin >> x >> y;
-            }
-
-            if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
-            {
-                matrix2[x][y] = -matrix2[x][y];
-                MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
-                howManyDestroyedPlayer1++;
-            }
+            cin >> x >> y;
         }
-        else
+
+        if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
         {
-            while (x > 10 or x < 1 or y > 10 or y < 1)
-            {
-                cin >> x >> y;
-            }
-
-            if (matrix[x][y] <= 15 and matrix[x][y] >= 11)
-            {
-                matrix[x][y] = -matrix[x][y];
-                MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
-
-                howManyDestroyedPlayer2++;
-            }
+            matrix2[x][y] = -matrix2[x][y];
+            MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
+            howManyDestroyedPlayer1++;
         }
-    
+    }
+    else
+    {
+        while (x > 10 or x < 1 or y > 10 or y < 1)
+        {
+            cin >> x >> y;
+        }
+
+        if (matrix[x][y] <= 15 and matrix[x][y] >= 11)
+        {
+            matrix[x][y] = -matrix[x][y];
+            MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
+
+            howManyDestroyedPlayer2++;
+        }
+    }
 }
 
 void startOfGame()
@@ -295,6 +293,41 @@ void randomShips()
     placeShips2(3, 23);
     placeShips2(4, 24);
     placeShips2(5, 25);
+    placeMine();
+}
+void placeMine()
+{
+
+    int y;
+    int x;
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        /* code */
+
+        y = rand() % 10 + 1;
+        x = rand() % 10 + 1;
+        while (matrix2[x][y] != -1 and ( matrix[x][y] ==11 or matrix[x][y] ==12 or matrix[x][y] ==13 or matrix[x][y] ==14 or matrix[x][y] ==15 ))
+        {
+            y = rand() % 10 + 1;
+            x = rand() % 10 + 1;
+        }
+        matrix2[x][y] = 1;
+    }
+
+    for (size_t i = 0; i < 3; i++)
+    {
+        /* code */
+
+        y = rand() % 10 + 1;
+        x = rand() % 10 + 1;
+        while (matrix[x][y] != -1 and ( matrix2[x][y] ==21 or matrix2[x][y] ==22 or matrix2[x][y] ==23 or matrix2[x][y] ==24 or matrix2[x][y] ==25 ))
+        {
+            y = rand() % 10 + 1;
+            x = rand() % 10 + 1;
+        }
+        matrix[x][y] = 1;
+    }
 }
 void func()
 {
@@ -352,19 +385,11 @@ void func()
 
 void drawPlayerTable(int name)
 {
-    static bool first = true;
-    if (first)
-    {
-        first = false;
-    }
-    else 
-    {
-            moveShips();
 
-    }
     
+
     clsDelete();
-  
+
     if (name == 1)
     {
         cout << "                             " << player1 << endl;
@@ -375,8 +400,29 @@ void drawPlayerTable(int name)
         {
             for (size_t j = 1; j < 11; j++)
             {
+
+
+
+                if (matrix2[i][j] == 1 and (matrix[i][j] == 11 or matrix[i][j] == 12 or matrix[i][j] == 13 or matrix[i][j] == 14 or matrix[i][j] == 15))
+                {
+                    matrix2[i][j] = -1;
+                    matrix[i][j] = -matrix[i][j];
+                }
+                if (matrix[i][j] == 1 and (matrix2[i][j] == 21 or matrix2[i][j] == 22 or matrix2[i][j] == 23 or matrix2[i][j] == 24 or matrix2[i][j] == 25))
+                {
+                    matrix[i][j] = -1;
+                    matrix2[i][j] = -matrix2[i][j];
+                }
+
+
+
+
+
+
+
                 if (matrix[i][j] == 11 or matrix[i][j] == 12 or matrix[i][j] == 13 or matrix[i][j] == 14 or matrix[i][j] == 15)
                 {
+
                     int row = 4 + (i - 1) * 2;
                     int col = 6 + ((j - 1) * 5);
 
@@ -390,6 +436,15 @@ void drawPlayerTable(int name)
 
                     cout << "\033[" << row << ";" << col << "H";
                     cout << "🔥🔥";
+                }
+                else if (matrix[i][j] == 1)
+                {
+
+                    int row = 4 + (i - 1) * 2;
+                    int col = 6 + ((j - 1) * 5);
+
+                    cout << "\033[" << row << ";" << col << "H";
+                    cout << "☠☠";
                 }
             }
         }
@@ -420,6 +475,14 @@ void drawPlayerTable(int name)
 
                     cout << "\033[" << row << ";" << col << "H";
                     cout << "🔥🔥";
+                }
+                else if (matrix2[i][j] == 1)
+                {
+                    int row = 4 + (i - 1) * 2;
+                    int col = 6 + ((j - 1) * 5);
+
+                    cout << "\033[" << row << ";" << col << "H";
+                    cout << "☠☠";
                 }
             }
         }

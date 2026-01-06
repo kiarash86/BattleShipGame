@@ -36,3 +36,4 @@ bool matrix214(int i, int j);
 bool matrix215(int i, int j);
 bool isThereAWinner();
 void hit(int player);
+void placeMine();

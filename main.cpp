@@ -30,6 +30,7 @@ int main()
                 drawPlayerTable(player);
                 hit(player);
                 player = 3 - player;
+                moveShips();
             }
 
             break;
