@@ -79,9 +79,13 @@ void hit(int player)
 {
     int x, y;
     cin >> x >> y;
+    if (x == 11 and y == 11)
+    {
+    }
+
     if (x == 0 and y == 0)
     {
-        if (player == 1)
+        if (player == 1 and howManyDestroyedPlayer2 != 0)
         {
             if (howManyHealedPlayer1 < 3)
             {
@@ -91,7 +95,7 @@ void hit(int player)
 
             /* code */
         }
-        else
+        else if (player == 2 and howManyDestroyedPlayer1 != 0)
         {
             if (howManyHealedPlayer2 < 3)
             {
@@ -116,6 +120,15 @@ void hit(int player)
             MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
             howManyDestroyedPlayer1++;
         }
+        else if (matrix2[x][y] == 1)
+        {
+            matrix2[x][y] = -1;
+            if (matrix[x][y] >= 11 and matrix[x][y] <= 15)
+            {
+                matrix[x][y] = -matrix[x][y];
+                howManyDestroyedPlayer2++;
+            }
+        }
     }
     else
     {
@@ -130,6 +143,15 @@ void hit(int player)
             MessageBoxA(NULL, "hit succesfully", "hit", MB_OK);
 
             howManyDestroyedPlayer2++;
+        }
+        else if (matrix[x][y] == 1)
+        {
+            matrix[x][y] = -1;
+            if (matrix2[x][y] >= 21 and matrix2[x][y] <= 25)
+            {
+                matrix2[x][y] = -matrix2[x][y];
+                howManyDestroyedPlayer1++;
+            }
         }
     }
 }
@@ -307,7 +329,7 @@ void placeMine()
 
         y = rand() % 10 + 1;
         x = rand() % 10 + 1;
-        while (matrix2[x][y] != -1 and ( matrix[x][y] ==11 or matrix[x][y] ==12 or matrix[x][y] ==13 or matrix[x][y] ==14 or matrix[x][y] ==15 ))
+        while (matrix2[x][y] != -1)
         {
             y = rand() % 10 + 1;
             x = rand() % 10 + 1;
@@ -321,7 +343,7 @@ void placeMine()
 
         y = rand() % 10 + 1;
         x = rand() % 10 + 1;
-        while (matrix[x][y] != -1 and ( matrix2[x][y] ==21 or matrix2[x][y] ==22 or matrix2[x][y] ==23 or matrix2[x][y] ==24 or matrix2[x][y] ==25 ))
+        while (matrix[x][y] != -1)
         {
             y = rand() % 10 + 1;
             x = rand() % 10 + 1;
@@ -386,8 +408,6 @@ void func()
 void drawPlayerTable(int name)
 {
 
-    
-
     clsDelete();
 
     if (name == 1)
@@ -401,24 +421,16 @@ void drawPlayerTable(int name)
             for (size_t j = 1; j < 11; j++)
             {
 
-
-
-                if (matrix2[i][j] == 1 and (matrix[i][j] == 11 or matrix[i][j] == 12 or matrix[i][j] == 13 or matrix[i][j] == 14 or matrix[i][j] == 15))
-                {
-                    matrix2[i][j] = -1;
-                    matrix[i][j] = -matrix[i][j];
-                }
-                if (matrix[i][j] == 1 and (matrix2[i][j] == 21 or matrix2[i][j] == 22 or matrix2[i][j] == 23 or matrix2[i][j] == 24 or matrix2[i][j] == 25))
-                {
-                    matrix[i][j] = -1;
-                    matrix2[i][j] = -matrix2[i][j];
-                }
-
-
-
-
-
-
+                // if (matrix2[i][j] == 1 and (matrix[i][j] == 11 or matrix[i][j] == 12 or matrix[i][j] == 13 or matrix[i][j] == 14 or matrix[i][j] == 15))
+                // {
+                //     matrix2[i][j] = -1;
+                //     matrix[i][j] = -matrix[i][j];
+                // }
+                // if (matrix[i][j] == 1 and (matrix2[i][j] == 21 or matrix2[i][j] == 22 or matrix2[i][j] == 23 or matrix2[i][j] == 24 or matrix2[i][j] == 25))
+                // {
+                //     matrix[i][j] = -1;
+                //     matrix2[i][j] = -matrix2[i][j];
+                // }
 
                 if (matrix[i][j] == 11 or matrix[i][j] == 12 or matrix[i][j] == 13 or matrix[i][j] == 14 or matrix[i][j] == 15)
                 {
