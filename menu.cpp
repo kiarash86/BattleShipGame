@@ -31,31 +31,20 @@ clsDelete();
 }
 
 
-void switchToGo()
+int switchToGo()
 {
     int input ;
     cin >> input;
-    switch (input)
+    if (input !=1 and input !=2 and input !=3)
     {
-    case 1:
-        startOfGame();
-    break;
-    
-    
-    case 2:
-        help();
-        break;
-    
-    
-    case 3:
-       exit(0);
-        break;
-    
-    
-    default:
-    showMenu();
-        break;
+           cin >> input;
+
     }
+    
+
+    return input;
+
+
 
 
 }

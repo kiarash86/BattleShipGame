@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-void switchToGo();
+int switchToGo();
 void showMenu();
 bool exit(string input);
 void help();

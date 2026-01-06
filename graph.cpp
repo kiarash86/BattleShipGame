@@ -89,9 +89,7 @@ void startOfGame()
     cin >> player1;
     cout << "ENTER PLAYER 2 NAME'S: ";
     cin >> player2;
-    randomShips();
-    clsDelete();
-    drawPlayerTable(1);
+    
 }
 void utfChange()
 {
@@ -190,15 +188,6 @@ bool placeShips(int n, int player)
     {
         matrix[x][y + j] = player;
     }
-
-    //   for (auto &&i : matrix)
-    // {
-    //     for (auto &&j : i)
-    //     {
-    //         cout << j << ' ';
-    //     }
-    //     cout << endl;
-    // }
     return true;
 }
 

@@ -10,11 +10,21 @@ int main()
 
     utfChange();
     showMenu();
-    switchToGo();
+    int swit = switchToGo();
+    switch (swit)
+    {
+    case 1:
+        startOfGame();
+        randomShips();
+        drawPlayerTable(1);
+        break;
 
-    // vector<pair<int , int>> ali;
-    //   clsDelete();
-    //   tabledraw();
+    case 2:
+        help();
+        break;
 
-    return 0;
+    case 3:
+        exit(0);
+        break;
+    }
 }
