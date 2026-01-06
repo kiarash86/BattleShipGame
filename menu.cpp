@@ -37,8 +37,8 @@ void switchToGo()
     switch (input)
     {
     case 1:
-        tabledraw();
-        break;
+        startOfGame();
+    break;
     
     
     case 2:
