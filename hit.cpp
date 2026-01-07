@@ -183,20 +183,20 @@ void hit(int player , vector<vector<int>> &matrix, vector<vector<int>> &matrix2 
         }
     }
 }
-bool isThereAWinner(int howManyDestroyedPlayer1 , int howManyDestroyedPlayer2)
+bool isThereAWinner(int howManyDestroyedPlayer1 , int howManyDestroyedPlayer2 , vector<string> players)
 {
     if (howManyDestroyedPlayer1 == 17)
     {
-        player1 += "is the winner";
+        players[0] += "is the winner";
 
-        MessageBoxA(NULL, player1.c_str(), "finish", MB_OK);
+        MessageBoxA(NULL, players[0] .c_str(), "finish", MB_OK);
         return true;
     }
     else if (howManyDestroyedPlayer2 == 17)
     {
-        player2 += "is the winner";
+        players[1]  += "is the winner";
 
-        MessageBoxA(NULL, player2.c_str(), "finish", MB_OK);
+        MessageBoxA(NULL, players[1].c_str(), "finish", MB_OK);
         return true;
     }
 

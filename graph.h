@@ -1,34 +1,18 @@
-
+#pragma once
 #define WIN32_LEAN_AND_MEAN
 #define _HAS_STD_BYTE 0
 #include <windows.h>
-
-#include "hit.h"
-
 #include <cstdlib>
 #include <iostream>
-
-#include <cmath>
-#include <random>
-#include <algorithm>
-
 #include <vector>
+#include <ctime>
+#include <algorithm>
+#include <random>
 using namespace std;
 void clsDelete();
 void tabledraw();
 void utfChange();
-
-void randomShips();
-bool placeShips(int n, int player);
-void drawPlayerTable(int name);
-
-
-
-
-
-
-
-
-
-void placeMine();
-bool radar(int player);
+void func(vector<vector<int>> &matrix , vector<vector<int>> &matrix2);
+void randomShips(vector<vector<int>> &matrix, vector<vector<int>> &matrix2);
+void drawPlayerTable(int name , vector<vector<int>> &matrix , vector<vector<int>> &matrix2 , vector<string> players);
+void placeMine(vector<vector<int>> &matrix , vector<vector<int>> &matrix2);

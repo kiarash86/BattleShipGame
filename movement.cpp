@@ -5,11 +5,13 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include "graph.h"
 #include <algorithm>
 #include <vector>
 using namespace std;
 vector<int> randomNumber()
 {
+
     vector<int> v = {1, 2, 3, 4};
 
     static mt19937 rng(std::random_device{}());
@@ -17,6 +19,115 @@ vector<int> randomNumber()
 
     return v;
 }
+
+
+
+
+bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
+{
+
+    vector<int> random = randomNumber();
+   // cout << "*****entered\n";
+    for (auto &&ww : random)
+    {
+        switch (ww)
+        {
+        case 1:
+
+            if (i >= 2)
+            {
+                for (int test = 0; test < length; test++)
+                {
+                    if (matrix[i - 1][j + test] != -1)
+                    {
+                        length =0;
+                        break;
+                    }
+                }
+                if (length ==0)
+                {
+                    break;
+                }
+                
+                for (int plus = 0; plus < length; plus++)
+                {
+                  //  cout <<matrix[i][j]<<"top\n";
+                    matrix[i - 1][j + plus] = matrix[i][j+plus];
+                    matrix[i][j + plus] = -1;
+                }
+               // func(matrix , matrix);
+             //   cout << "\n";
+                return true;
+            }
+            break;
+        case 2:
+
+            if (i <= 9)
+            {
+                for (int test = 0; test < length; test++)
+                {
+                    if (matrix[i + 1][j + test] != -1)
+                    {
+
+                        break;
+                    }
+                }
+
+                for (int plus = 0; plus < length; plus++)
+                {
+                   // cout <<matrix[i][j]<<"bottom\n";
+                    matrix[i + 1][j + plus] = matrix[i][j+plus];
+                    matrix[i][j + plus] = -1;
+                }
+             //                   func(matrix , matrix);
+              //  cout << "\n";
+                return true;
+            }
+            break;
+
+        case 3:
+
+            if (j >= 2 and matrix[i][j - 1] == -1)
+            {
+                for (int plus = 0; plus < length; plus++)
+                {
+                 //   cout <<matrix[i][j]<< "left\n";
+                    matrix[i][j + plus - 1] = matrix[i][j + plus];
+                    // matrix[i][j + plus] = -1;
+                }
+                matrix[i][j + length - 1] = -1;
+               //                 func(matrix , matrix);
+              //  cout << "\n";
+                return true;
+            }
+            break;
+        case 4:
+            if (j+length <=10 and matrix[i][j + length] == -1)
+            {
+
+                for (int plus = length; plus >0; plus--)
+                {
+                   // cout <<matrix[i][j]<< "right\n";
+                    matrix[i][j + plus] = matrix[i][j + plus-1];
+                    // matrix[i][j + plus] = -1;
+                }
+                matrix[i][j] = -1;
+              //  cout <<matrix[i][j]<< "right\n";
+           //                   func(matrix , matrix);
+              //  cout << "\n";
+                return true;
+
+            }
+            break;
+        }
+    }
+               //     func(matrix , matrix);
+              //  cout << "\n";
+    return true;
+}
+
+
+
 
 void moveShips(vector<vector<int>> &matrix, vector<vector<int>> &matrix2)
 {
@@ -148,6 +259,7 @@ void moveShips(vector<vector<int>> &matrix, vector<vector<int>> &matrix2)
                         {
                             length = 2;
                             changeposition21 = Matrix(i, j, matrix2, length);
+                            
                         }
                     }
                 }
@@ -227,672 +339,3 @@ void moveShips(vector<vector<int>> &matrix, vector<vector<int>> &matrix2)
         }
     }
 }
-
-bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
-{
-
-    vector<int> random = randomNumber();
-
-    for (auto &&ww : random)
-    {
-        switch (ww)
-        {
-        case 1:
-
-            if (i >= 2)
-            {
-                for (int test = 0; test < length; test++)
-                {
-                    if (matrix[i - 1][j + test] != -1)
-                    {
-
-                        break;
-                    }
-                }
-
-                for (int plus = 0; plus < length; plus++)
-                {
-                    matrix[i - 1][j + plus] = matrix[i][j];
-                    matrix[i][j + plus] = -1;
-                }
-                return true;
-            }
-            break;
-        case 2:
-
-            if (i <= 9)
-            {
-                for (int test = 0; test < length; test++)
-                {
-                    if (matrix[i + 1][j + test] != -1)
-                    {
-
-                        break;
-                    }
-                }
-
-                for (int plus = 0; plus < length; plus++)
-                {
-                    matrix[i + 1][j + plus] = matrix[i][j];
-                    matrix[i][j + plus] = -1;
-                }
-                return true;
-            }
-            break;
-
-        case 3:
-
-            if (j >= 2 and matrix[i][j - 1] == -1)
-            {
-                for (int plus = 0; plus < length; plus++)
-                {
-                    matrix[i][j + plus - 1] = matrix[i][j + plus];
-                    // matrix[i][j + plus] = -1;
-                }
-                matrix[i][j + length - 1] = -1;
-                return true;
-            }
-            break;
-        case 4:
-            if (j <= 8 and matrix[i][j + length] == -1)
-            {
-
-                for (int plus = length; plus >0; plus++)
-                {
-                    matrix[i][j + plus] = matrix[i][j + plus-1];
-                    // matrix[i][j + plus] = -1;
-                }
-                matrix[i][j] = -1;
-                return true;
-
-            }
-            break;
-        }
-    }
-    return false;
-}
-
-
-
-
-
-
-
-
-// bool matrix12(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
-//             {
-//                 matrix[i - 1][j] = matrix[i][j];
-//                 matrix[i - 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i - 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 return true;
-//             }
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
-//             {
-//                 matrix[i + 1][j] = matrix[i][j];
-//                 matrix[i + 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i + 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 return true;
-//             }
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix[i][j - 1] == -1)
-//             {
-//                 matrix[i][j - 1] = matrix[i][j];
-//                 matrix[i][j] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = -1;
-//                 return true;
-//             }
-//             break;
-//         case 4:
-//             if (j <= 7 and matrix[i][j + 3] == -1)
-//             {
-//                 matrix[i][j + 3] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j];
-//                 matrix[i][j] = -1;
-//                 return true;
-//             }
-//             break;
-//         }
-//     }
-//     return false;
-// }
-// bool matrix13(int i, int j)
-// {
-
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1)
-//             {
-//                 matrix[i - 1][j] = matrix[i][j];
-//                 matrix[i - 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i - 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1)
-//             {
-//                 matrix[i + 1][j] = matrix[i][j];
-//                 matrix[i + 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i + 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 return true;
-//             }
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix[i][j - 1] == -1)
-//             {
-//                 matrix[i][j - 1] = matrix[i][j];
-//                 matrix[i][j] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = -1;
-//                 return true;
-//             }
-//             break;
-//         case 4:
-//             if (j <= 7 and matrix[i][j + 3] == -1)
-//             {
-//                 matrix[i][j + 3] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j];
-//                 matrix[i][j] = -1;
-//                 return true;
-//             }
-//             break;
-//         }
-//     }
-
-//     return false;
-// }
-// bool matrix14(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1)
-//             {
-//                 matrix[i - 1][j] = matrix[i][j];
-//                 matrix[i - 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i - 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i - 1][j + 3] = matrix[i][j + 3];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 matrix[i][j + 3] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1)
-//             {
-//                 matrix[i + 1][j] = matrix[i][j];
-//                 matrix[i + 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i + 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i + 1][j + 3] = matrix[i][j + 3];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 matrix[i][j + 3] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix[i][j - 1] == -1)
-//             {
-//                 matrix[i][j - 1] = matrix[i][j];
-//                 matrix[i][j] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = matrix[i][j + 3];
-//                 matrix[i][j + 3] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 6 and matrix[i][j + 4] == -1)
-//             {
-//                 matrix[i][j + 4] = matrix[i][j + 3];
-//                 matrix[i][j + 3] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j];
-//                 matrix[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-//     return false;
-// }
-// bool matrix15(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix[i - 1][j] == -1 and matrix[i - 1][j + 1] == -1 and matrix[i - 1][j + 2] == -1 and matrix[i - 1][j + 3] == -1 and matrix[i - 1][j + 4] == -1)
-//             {
-//                 matrix[i - 1][j] = matrix[i][j];
-//                 matrix[i - 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i - 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i - 1][j + 3] = matrix[i][j + 3];
-//                 matrix[i - 1][j + 4] = matrix[i][j + 4];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 matrix[i][j + 3] = -1;
-//                 matrix[i][j + 4] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix[i + 1][j] == -1 and matrix[i + 1][j + 1] == -1 and matrix[i + 1][j + 2] == -1 and matrix[i + 1][j + 3] == -1 and matrix[i + 1][j + 4] == -1)
-//             {
-//                 matrix[i + 1][j] = matrix[i][j];
-//                 matrix[i + 1][j + 1] = matrix[i][j + 1];
-//                 matrix[i + 1][j + 2] = matrix[i][j + 2];
-//                 matrix[i + 1][j + 3] = matrix[i][j + 3];
-//                 matrix[i + 1][j + 4] = matrix[i][j + 4];
-//                 matrix[i][j] = -1;
-//                 matrix[i][j + 1] = -1;
-//                 matrix[i][j + 2] = -1;
-//                 matrix[i][j + 3] = -1;
-//                 matrix[i][j + 4] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix[i][j - 1] == -1)
-//             {
-//                 matrix[i][j - 1] = matrix[i][j];
-//                 matrix[i][j] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = matrix[i][j + 3];
-//                 matrix[i][j + 3] = matrix[i][j + 4];
-//                 matrix[i][j + 4] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 5 and matrix[i][j + 5] == -1)
-//             {
-//                 matrix[i][j + 5] = matrix[i][j + 4];
-//                 matrix[i][j + 4] = matrix[i][j + 3];
-//                 matrix[i][j + 3] = matrix[i][j + 2];
-//                 matrix[i][j + 2] = matrix[i][j + 1];
-//                 matrix[i][j + 1] = matrix[i][j];
-//                 matrix[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-//     return false;
-// }
-
-// bool matrix211(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1)
-//             {
-//                 matrix2[i - 1][j] = matrix2[i][j];
-//                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1)
-//             {
-//                 matrix2[i + 1][j] = matrix2[i][j];
-//                 matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix2[i][j - 1] == -1)
-//             {
-//                 matrix2[i][j - 1] = matrix2[i][j];
-//                 matrix2[i][j] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 8 and matrix2[i][j + 2] == -1)
-//             {
-//                 matrix2[i][j + 2] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j];
-//                 matrix2[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-//     return false;
-// }
-// bool matrix212(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
-//             {
-//                 matrix2[i - 1][j] = matrix2[i][j];
-//                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
-//             {
-//                 matrix2[i + 1][j] = matrix2[i][j];
-//                 matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix2[i][j - 1] == -1)
-//             {
-//                 matrix2[i][j - 1] = matrix2[i][j];
-//                 matrix2[i][j] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 7 and matrix2[i][j + 3] == -1)
-//             {
-//                 matrix2[i][j + 3] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j];
-//                 matrix2[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-//     return false;
-// }
-// bool matrix213(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1)
-//             {
-//                 matrix2[i - 1][j] = matrix2[i][j];
-//                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1)
-//             {
-//                 matrix2[i + 1][j] = matrix2[i][j];
-//                 matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix2[i][j - 1] == -1)
-//             {
-//                 matrix2[i][j - 1] = matrix2[i][j];
-//                 matrix2[i][j] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 7 and matrix2[i][j + 3] == -1)
-//             {
-//                 matrix2[i][j + 3] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j];
-//                 matrix2[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-//     return false;
-// }
-// bool matrix214(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1)
-//             {
-//                 matrix2[i - 1][j] = matrix2[i][j];
-//                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i - 1][j + 3] = matrix2[i][j + 3];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 matrix2[i][j + 3] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1)
-//             {
-//                 matrix2[i + 1][j] = matrix2[i][j];
-//                 matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i + 1][j + 3] = matrix2[i][j + 3];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 matrix2[i][j + 3] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix2[i][j - 1] == -1)
-//             {
-//                 matrix2[i][j - 1] = matrix2[i][j];
-//                 matrix2[i][j] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = matrix2[i][j + 3];
-//                 matrix2[i][j + 3] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 6 and matrix2[i][j + 4] == -1)
-//             {
-//                 matrix2[i][j + 4] = matrix2[i][j + 3];
-//                 matrix2[i][j + 3] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j];
-//                 matrix2[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-
-//     return false;
-// }
-// bool matrix215(int i, int j)
-// {
-//     vector<int> random = randomNumber();
-
-//     for (auto &&ww : random)
-//     {
-
-//         switch (ww)
-//         {
-//         case 1:
-//             if (i >= 2 and matrix2[i - 1][j] == -1 and matrix2[i - 1][j + 1] == -1 and matrix2[i - 1][j + 2] == -1 and matrix2[i - 1][j + 3] == -1 and matrix2[i - 1][j + 4] == -1)
-//             {
-//                 matrix2[i - 1][j] = matrix2[i][j];
-//                 matrix2[i - 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i - 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i - 1][j + 3] = matrix2[i][j + 3];
-//                 matrix2[i - 1][j + 4] = matrix2[i][j + 4];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 matrix2[i][j + 3] = -1;
-//                 matrix2[i][j + 4] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 2:
-//             if (i <= 9 and matrix2[i + 1][j] == -1 and matrix2[i + 1][j + 1] == -1 and matrix2[i + 1][j + 2] == -1 and matrix2[i + 1][j + 3] == -1 and matrix2[i + 1][j + 4] == -1)
-//             {
-//                 matrix2[i + 1][j] = matrix2[i][j];
-//                 matrix2[i + 1][j + 1] = matrix2[i][j + 1];
-//                 matrix2[i + 1][j + 2] = matrix2[i][j + 2];
-//                 matrix2[i + 1][j + 3] = matrix2[i][j + 3];
-//                 matrix2[i + 1][j + 4] = matrix2[i][j + 4];
-//                 matrix2[i][j] = -1;
-//                 matrix2[i][j + 1] = -1;
-//                 matrix2[i][j + 2] = -1;
-//                 matrix2[i][j + 3] = -1;
-//                 matrix2[i][j + 4] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 3:
-//             if (j >= 2 and matrix2[i][j - 1] == -1)
-//             {
-//                 matrix2[i][j - 1] = matrix2[i][j];
-//                 matrix2[i][j] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = matrix2[i][j + 3];
-//                 matrix2[i][j + 3] = matrix2[i][j + 4];
-//                 matrix2[i][j + 4] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         case 4:
-//             if (j <= 5 and matrix2[i][j + 5] == -1)
-//             {
-//                 matrix2[i][j + 5] = matrix2[i][j + 4];
-//                 matrix2[i][j + 4] = matrix2[i][j + 3];
-//                 matrix2[i][j + 3] = matrix2[i][j + 2];
-//                 matrix2[i][j + 2] = matrix2[i][j + 1];
-//                 matrix2[i][j + 1] = matrix2[i][j];
-//                 matrix2[i][j] = -1;
-//                 return true;
-//             }
-
-//             break;
-//         }
-//     }
-
-//     return false;
-// }

@@ -8,17 +8,15 @@
 using namespace std;
 int main()
 {
-    srand(time(0));
+            srand(time(0));
 
     utfChange();
-    int swit;
-    int player = 1;
-
+    
     while (true)
     {
+        int swit;
+        int player = 1;
         vector<vector<int>> matrix(11, vector<int>(11, -1));
-        vector<vector<int>> matrixMineA(11, vector<int>(11, 0));
-        vector<vector<int>> matrixMineB(11, vector<int>(11, 0));
         vector<vector<int>> matrix2(11, vector<int>(11, -1));
         vector<string> players(2);
         int howManyDestroyedPlayer1 = 0;
@@ -31,17 +29,33 @@ int main()
         {
         case 1:
             players = startOfGame();
-            randomShips();
-            // drawPlayerTable(player);
-            //  hit(player);
-            //  player = 3 - player;
+            randomShips(matrix, matrix2);
+            placeMine(matrix, matrix2);
 
-            while (!isThereAWinner(howManyDestroyedPlayer1 , howManyDestroyedPlayer2))
+            while (!isThereAWinner(howManyDestroyedPlayer1, howManyDestroyedPlayer2, players))
             {
-                drawPlayerTable(player);
+                clsDelete();
+                cout << "                             " << players[player -1] << "\n";
+
+                tabledraw();
+               
+               
+               
+               //
+                drawPlayerTable(player, matrix, matrix2, players);
+                //
+                
+                
+                func(matrix, matrix2);
+               
+               
+               //
                 hit(player, matrix, matrix2, howManyDestroyedPlayer1, howManyDestroyedPlayer2, howManyHealedPlayer1, howManyHealedPlayer2);
+               //
                 player = 3 - player;
+               //
                 moveShips(matrix, matrix2);
+                //
             }
 
             break;
