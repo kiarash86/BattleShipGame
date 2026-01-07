@@ -1,5 +1,6 @@
 #include <iostream>
 #include "graph.h"
+#include "hit.h"
 #include "menu.h"
 #include <vector>
 
@@ -28,7 +29,7 @@ int main()
             while (!isThereAWinner())
             {
                 drawPlayerTable(player);
-                hit(player);
+                hit(player , matrix , matrix2 ,howManyDestroyedPlayer1 , howManyDestroyedPlayer2 , howManyHealedPlayer1 , howManyHealedPlayer2);
                 player = 3 - player;
                 moveShips();
             }

@@ -3,7 +3,7 @@
 #define _HAS_STD_BYTE 0
 #include <windows.h>
 
-
+#include "hit.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -35,6 +35,13 @@ bool matrix213(int i, int j);
 bool matrix214(int i, int j);
 bool matrix215(int i, int j);
 bool isThereAWinner();
-void hit(int player);
+
+
+
+
+
+
+
+
 void placeMine();
 bool radar(int player);
