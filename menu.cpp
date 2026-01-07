@@ -64,3 +64,15 @@ bool help()
      return true;
     
 }
+
+
+
+vector<string> startOfGame()
+{
+    vector<string> players(2);
+    cout << "ENTER PLAYER 1 NAME'S: ";
+    cin >> players[0];
+    cout << "ENTER PLAYER 2 NAME'S: ";
+    cin >> players[1];
+    return players;
+}

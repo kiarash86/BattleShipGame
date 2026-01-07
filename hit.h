@@ -5,5 +5,5 @@
 #include <vector>
 
 
-
+bool isThereAWinner(int howManyDestroyedPlayer1 , int howManyDestroyedPlayer2);
 void hit(int player , vector<vector<int>> &matrix, vector<vector<int>> &matrix2 ,  int &howManyDestroyedPlayer1 , int &howManyDestroyedPlayer2  , int & howManyHealedPlayer1, int & howManyHealedPlayer2);

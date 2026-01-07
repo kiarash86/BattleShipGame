@@ -6,3 +6,4 @@ int switchToGo();
 void showMenu();
 bool exit(string input);
 bool help();
+vector<string> startOfGame();
