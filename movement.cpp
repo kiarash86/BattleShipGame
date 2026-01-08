@@ -30,6 +30,7 @@ bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
    // cout << "*****entered\n";
     for (auto &&ww : random)
     {
+        int x =0;
         switch (ww)
         {
         case 1:
@@ -40,12 +41,13 @@ bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
                 {
                     if (matrix[i - 1][j + test] != -1)
                     {
-                        length =0;
+                        x =1;
                         break;
                     }
                 }
-                if (length ==0)
+                if (x ==1)
                 {
+                    x=0;
                     break;
                 }
                 
@@ -68,11 +70,15 @@ bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
                 {
                     if (matrix[i + 1][j + test] != -1)
                     {
-
+                        x = 1;
                         break;
                     }
                 }
-
+                if(x==1)
+                {
+                    x=0;
+                    break;
+                }
                 for (int plus = 0; plus < length; plus++)
                 {
                    // cout <<matrix[i][j]<<"bottom\n";
@@ -87,7 +93,7 @@ bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
 
         case 3:
 
-            if (j >= 2 and matrix[i][j - 1] == -1)
+            if (j >= 2 and j+length<=10 and matrix[i][j - 1] == -1)
             {
                 for (int plus = 0; plus < length; plus++)
                 {
@@ -102,7 +108,7 @@ bool Matrix(int i, int j, vector<vector<int>> &matrix, int length)
             }
             break;
         case 4:
-            if (j+length <=10 and matrix[i][j + length] == -1)
+            if (j+length <10 and matrix[i][j + length] == -1)
             {
 
                 for (int plus = length; plus >0; plus--)
