@@ -141,6 +141,9 @@ void hit(int player, vector<vector<int>> &matrix, vector<vector<int>> &matrix2, 
         {
             cin >> x >> y;
         }
+ 
+cout << "djdjd";
+
 
         if (matrix2[x][y] <= 25 and matrix2[x][y] >= 21)
         {
